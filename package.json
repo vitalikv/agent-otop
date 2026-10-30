@@ -14,7 +14,11 @@
     "preview": "vite preview --host 127.0.0.1",
     "data:prepare": "node scripts/check-reference-answers.mjs && node scripts/prepare-knowledge.mjs",
     "data:check": "node scripts/check-reference-answers.mjs && node --test scripts/check-knowledge-data.test.mjs scripts/check-pressure-data.test.mjs scripts/check-stage3-data.test.mjs",
-    "data:check-generated": "node scripts/prepare-knowledge.mjs --check"
+    "data:check-generated": "node scripts/prepare-knowledge.mjs --check",
+    "train:data": "tsc -p tsconfig.training.json && node .training-build/training/build-dataset.js",
+    "train:model": "node scripts/train.mjs",
+    "train:check": "tsc -p tsconfig.training.json && node .training-build/training/check-model.js",
+    "intent": "tsc -p tsconfig.training.json && node .training-build/training/classify.js"
   },
   "devDependencies": {
     "@types/node": "^22.20.5",

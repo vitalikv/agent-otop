@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.server.json",
+  "compilerOptions": { "outDir": ".training-build" },
+  "include": ["server", "shared", "training"]
+}

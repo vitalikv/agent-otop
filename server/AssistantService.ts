@@ -19,7 +19,7 @@ export class AssistantService {
       const reference = this.knowledge.reference(safety);
       return { content: reference.answer, sources: reference.source_ids.map(id => this.knowledge.source(id)), choices: [], clarification: false, state: request.state };
     }
-    const reset = /новый расчет|сброс(?:ить)?(?: параметры)?/.test(text);
+    const reset = this.intents.isReset(text);
     const state = reset ? undefined : request.state;
     const extracted = this.extractor.extract(text, state);
     if (reset || this.intents.isFlow(text, extracted.parameters, state)) return this.dialog.answer(state, extracted.parameters, extracted.issue);

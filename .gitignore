@@ -6,3 +6,6 @@ dist-server/
 data/generated/
 *.local
 .env
+.training-build/
+training/.venv/
+__pycache__/

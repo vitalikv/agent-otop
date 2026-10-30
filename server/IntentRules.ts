@@ -11,6 +11,10 @@ export class IntentRules {
     return undefined;
   }
 
+  isReset(text: string): boolean {
+    return /новый расчет|сброс(?:ить)?(?: параметры)?/.test(text);
+  }
+
   isFlow(text: string, parameters: FlowInput, state?: DialogState): boolean {
     if (/насос|диаметр|скорост|минимальн.*расход|фактическ.*расход|расход.*газ|расход.*топлив/.test(text)) return false;
     if (/(?:подбор|подбери|выбрать|выбор|настроить|починить|купить|цена|стоимость|установить).*(?:радиатор|котел|труб|клапан|фитинг)/.test(text)) return false;
