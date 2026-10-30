@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "imported_on": "2026-10-30",
+  "upstream": {
+    "repository": "skeleton-wf",
+    "commit": "ba8f46fcd6afae1e88c762706f7d1789b389c799",
+    "directory": "docs/heating/installation-guide",
+    "worktree_dirty": false
+  },
+  "local_directory": "knowledge/installation-guide",
+  "text_normalization": "UTF-8 text, CRLF normalized to LF; SHA-256",
+  "files": [
+    {
+      "file": "01-input-data-and-heat-loss.md",
+      "upstream_sha256_lf": "49df5345ba06d1fa9f2b9b8b0f719e1a095147d24f8bcf878f06bcf1fb3c0992",
+      "local_sha256_lf": "49df5345ba06d1fa9f2b9b8b0f719e1a095147d24f8bcf878f06bcf1fb3c0992",
+      "adaptations": []
+    },
+    {
+      "file": "02-system-layouts.md",
+      "upstream_sha256_lf": "f3655579ebb09e0e3618f7b4a25830e68eed9174aeaed4189e3a9fe6cb315032",
+      "local_sha256_lf": "f3655579ebb09e0e3618f7b4a25830e68eed9174aeaed4189e3a9fe6cb315032",
+      "adaptations": []
+    },
+    {
+      "file": "03-radiator-selection.md",
+      "upstream_sha256_lf": "f45801faebc04a779c234b0836bd082f5277afea12dc2be7bf575239eb6a4884",
+      "local_sha256_lf": "f45801faebc04a779c234b0836bd082f5277afea12dc2be7bf575239eb6a4884",
+      "adaptations": []
+    },
+    {
+      "file": "04-radiator-connections.md",
+      "upstream_sha256_lf": "208f11a6ded7dfe0f9c0035e34b1fa22a16faf0b3fb1edd26ffc2244d33bc6a2",
+      "local_sha256_lf": "208f11a6ded7dfe0f9c0035e34b1fa22a16faf0b3fb1edd26ffc2244d33bc6a2",
+      "adaptations": []
+    },
+    {
+      "file": "05-pipe-sizing-and-hydraulics.md",
+      "upstream_sha256_lf": "327c02a27695c21153c0cc0dbe6a6baec55d2e65c663bbc646139212b18dc627",
+      "local_sha256_lf": "327c02a27695c21153c0cc0dbe6a6baec55d2e65c663bbc646139212b18dc627",
+      "adaptations": []
+    },
+    {
+      "file": "06-installation-and-commissioning.md",
+      "upstream_sha256_lf": "a70efb65780805332b2fe1a71abf99342b2eab25df7ae9638f0b427d82b75305",
+      "local_sha256_lf": "a70efb65780805332b2fe1a71abf99342b2eab25df7ae9638f0b427d82b75305",
+      "adaptations": []
+    },
+    {
+      "file": "07-worked-example.md",
+      "upstream_sha256_lf": "eadcb5f32d9f5cd650a33c88064dcc040b1244099beed131c002566a978740cd",
+      "local_sha256_lf": "eadcb5f32d9f5cd650a33c88064dcc040b1244099beed131c002566a978740cd",
+      "adaptations": []
+    },
+    {
+      "file": "08-rules-for-automatic-design.md",
+      "upstream_sha256_lf": "3c8341faa6527edbeee80d34cbe7c8d039bbb67f5d761566367d06fc77e8acda",
+      "local_sha256_lf": "51718ae4d89f6b60d0c88c1226d737dd096d93bfb0b562a713e4e02d56deb01d",
+      "adaptations": [
+        {
+          "kind": "external_developer_plan_link_to_text",
+          "original_link": "../auto-heating-plan.md",
+          "replacement": "плану автоотопления (`skeleton-wf/docs/heating/auto-heating-plan.md`, документ исходного проекта)"
+        },
+        {
+          "kind": "external_developer_plan_link_to_text",
+          "original_link": "../pipe-routing-auto-plan.md",
+          "replacement": "плану трассировки (`skeleton-wf/docs/heating/pipe-routing-auto-plan.md`, документ исходного проекта)"
+        }
+      ]
+    },
+    {
+      "file": "README.md",
+      "upstream_sha256_lf": "a3b1a4fff48ffac326c568977e8efe99fd6abe4521a455774fb8619095ac22e5",
+      "local_sha256_lf": "218543b84894c80ac702ea54fb3e610e1f8060c5e189395da087b007d53d29dc",
+      "adaptations": [
+        {
+          "kind": "external_developer_plan_link_to_text",
+          "original_link": "../auto-heating-plan.md",
+          "replacement": "План автоматики (`skeleton-wf/docs/heating/auto-heating-plan.md`, документ исходного проекта)"
+        },
+        {
+          "kind": "external_developer_plan_link_to_text",
+          "original_link": "../radiator-pipework-plan.md",
+          "replacement": "план обвязки (`skeleton-wf/docs/heating/radiator-pipework-plan.md`, документ исходного проекта)"
+        },
+        {
+          "kind": "external_developer_plan_link_to_text",
+          "original_link": "../pipe-routing-auto-plan.md",
+          "replacement": "план трассировки (`skeleton-wf/docs/heating/pipe-routing-auto-plan.md`, документ исходного проекта)"
+        },
+        {
+          "kind": "external_developer_plan_link_to_text",
+          "original_link": "../catalog-integration-preparation.md",
+          "replacement": "подготовка каталога (`skeleton-wf/docs/heating/catalog-integration-preparation.md`, документ исходного проекта)"
+        },
+        {
+          "kind": "external_developer_plan_link_to_text",
+          "original_link": "../port-attach-plan.md",
+          "replacement": "присоединение к разъёмам (`skeleton-wf/docs/heating/port-attach-plan.md`, документ исходного проекта)"
+        }
+      ]
+    },
+    {
+      "file": "sources.md",
+      "upstream_sha256_lf": "9d220d693168b535d15b7b134184e321b38b6443489ab2c88bee02cc54cc9070",
+      "local_sha256_lf": "9d220d693168b535d15b7b134184e321b38b6443489ab2c88bee02cc54cc9070",
+      "adaptations": []
+    }
+  ]
+}

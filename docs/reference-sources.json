@@ -1,0 +1,562 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-10-30",
+  "base_repository": "skeleton-wf",
+  "base_commit": "ba8f46fcd6afae1e88c762706f7d1789b389c799",
+  "base_directory_relative_to_docs": "knowledge/installation-guide",
+  "base_worktree_dirty": false,
+  "hash_normalization": "UTF-8 text, CRLF normalized to LF; SHA-256",
+  "sources": {
+    "g01.inputs": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/01-input-data-and-heat-loss.md",
+      "heading": "Что собрать до выбора оборудования",
+      "line_start": 5,
+      "line_end": 21,
+      "sha256_lf": "49df5345ba06d1fa9f2b9b8b0f719e1a095147d24f8bcf878f06bcf1fb3c0992",
+      "section_sha256_lf": "98b3c9a41edab0c54b5c626c9bd7b937b300e2ba20b9abb9a7cc76d14d9caa73",
+      "href": "knowledge/installation-guide/01-input-data-and-heat-loss.md#что-собрать-до-выбора-оборудования"
+    },
+    "g01.heat": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/01-input-data-and-heat-loss.md",
+      "heading": "Трансмиссионные потери",
+      "line_start": 22,
+      "line_end": 43,
+      "sha256_lf": "49df5345ba06d1fa9f2b9b8b0f719e1a095147d24f8bcf878f06bcf1fb3c0992",
+      "section_sha256_lf": "f781a1ac31bd8608c4002c1135ea2fa2eeb5d7a9c744702492056cd17acff9f1",
+      "href": "knowledge/installation-guide/01-input-data-and-heat-loss.md#трансмиссионные-потери"
+    },
+    "g01.air": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/01-input-data-and-heat-loss.md",
+      "heading": "Нагрев наружного воздуха",
+      "line_start": 44,
+      "line_end": 64,
+      "sha256_lf": "49df5345ba06d1fa9f2b9b8b0f719e1a095147d24f8bcf878f06bcf1fb3c0992",
+      "section_sha256_lf": "85442674c37c3cf961ba99bafbca44195e4e1205b1f4ae4e16839dd1bff3439c",
+      "href": "knowledge/installation-guide/01-input-data-and-heat-loss.md#нагрев-наружного-воздуха"
+    },
+    "g01.load": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/01-input-data-and-heat-loss.md",
+      "heading": "От нагрузки комнаты к нагрузке дома",
+      "line_start": 65,
+      "line_end": 85,
+      "sha256_lf": "49df5345ba06d1fa9f2b9b8b0f719e1a095147d24f8bcf878f06bcf1fb3c0992",
+      "section_sha256_lf": "6ffebcd28a363690b08c984ea9b80731188ccc5635ae2ea9d3e88766d8b24f4c",
+      "href": "knowledge/installation-guide/01-input-data-and-heat-loss.md#от-нагрузки-комнаты-к-нагрузке-дома"
+    },
+    "g01.missing": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/01-input-data-and-heat-loss.md",
+      "heading": "Что делать при нехватке данных",
+      "line_start": 86,
+      "line_end": 95,
+      "sha256_lf": "49df5345ba06d1fa9f2b9b8b0f719e1a095147d24f8bcf878f06bcf1fb3c0992",
+      "section_sha256_lf": "f92cff874ce191e66542cfec25ce9008f242a9b58ee193d24699a7d8a262ecba",
+      "href": "knowledge/installation-guide/01-input-data-and-heat-loss.md#что-делать-при-нехватке-данных"
+    },
+    "g02.compare": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/02-system-layouts.md",
+      "heading": "Сравнение",
+      "line_start": 9,
+      "line_end": 22,
+      "sha256_lf": "f3655579ebb09e0e3618f7b4a25830e68eed9174aeaed4189e3a9fe6cb315032",
+      "section_sha256_lf": "16cd9f665c3600fef0deb4754b30efcf258a8efc4f29523b813534b6542d4318",
+      "href": "knowledge/installation-guide/02-system-layouts.md#сравнение"
+    },
+    "g02.dead": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/02-system-layouts.md",
+      "heading": "Двухтрубная тупиковая",
+      "line_start": 23,
+      "line_end": 34,
+      "sha256_lf": "f3655579ebb09e0e3618f7b4a25830e68eed9174aeaed4189e3a9fe6cb315032",
+      "section_sha256_lf": "77ca5e0f33aa1841b1427840d4cc979f392830d4825aa255d2201f3f08b50296",
+      "href": "knowledge/installation-guide/02-system-layouts.md#двухтрубная-тупиковая"
+    },
+    "g02.return": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/02-system-layouts.md",
+      "heading": "Попутная схема",
+      "line_start": 35,
+      "line_end": 42,
+      "sha256_lf": "f3655579ebb09e0e3618f7b4a25830e68eed9174aeaed4189e3a9fe6cb315032",
+      "section_sha256_lf": "b511440c08175e0f7c2fa7cf6ceb9da48ab11996527e0e7fd3051703cf1cdb50",
+      "href": "knowledge/installation-guide/02-system-layouts.md#попутная-схема"
+    },
+    "g02.rays": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/02-system-layouts.md",
+      "heading": "Лучевая схема",
+      "line_start": 43,
+      "line_end": 54,
+      "sha256_lf": "f3655579ebb09e0e3618f7b4a25830e68eed9174aeaed4189e3a9fe6cb315032",
+      "section_sha256_lf": "b2d54eb505ecf85da8df156738b3bf740aba0b64499531486fd420437d76badf",
+      "href": "knowledge/installation-guide/02-system-layouts.md#лучевая-схема"
+    },
+    "g02.one": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/02-system-layouts.md",
+      "heading": "Однотрубная схема",
+      "line_start": 55,
+      "line_end": 70,
+      "sha256_lf": "f3655579ebb09e0e3618f7b4a25830e68eed9174aeaed4189e3a9fe6cb315032",
+      "section_sha256_lf": "f0d9313005397ec495dccafbce4ebd0760ad7ac94b5deb41dc234dddfac363f7",
+      "href": "knowledge/installation-guide/02-system-layouts.md#однотрубная-схема"
+    },
+    "g02.zones": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/02-system-layouts.md",
+      "heading": "Этажи и разные температурные контуры",
+      "line_start": 71,
+      "line_end": 82,
+      "sha256_lf": "f3655579ebb09e0e3618f7b4a25830e68eed9174aeaed4189e3a9fe6cb315032",
+      "section_sha256_lf": "67162d7d7adcf07a275c39ea0eafca801be34ec6ffc6edc581b5514c54ca62cc",
+      "href": "knowledge/installation-guide/02-system-layouts.md#этажи-и-разные-температурные-контуры"
+    },
+    "g03.types": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/03-radiator-selection.md",
+      "heading": "Какие приборы рассматривать",
+      "line_start": 5,
+      "line_end": 19,
+      "sha256_lf": "f45801faebc04a779c234b0836bd082f5277afea12dc2be7bf575239eb6a4884",
+      "section_sha256_lf": "b7293aa17f336014609ff961ed735bd90024da2e3cae290aec85c14d955a933a",
+      "href": "knowledge/installation-guide/03-radiator-selection.md#какие-приборы-рассматривать"
+    },
+    "g03.power": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/03-radiator-selection.md",
+      "heading": "Мощность при реальных температурах",
+      "line_start": 20,
+      "line_end": 54,
+      "sha256_lf": "f45801faebc04a779c234b0836bd082f5277afea12dc2be7bf575239eb6a4884",
+      "section_sha256_lf": "68c0ba7ee3a06d18154ae78f4265df281428c316ed8d156fedf6d339f0260eff",
+      "href": "knowledge/installation-guide/03-radiator-selection.md#мощность-при-реальных-температурах"
+    },
+    "g03.select": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/03-radiator-selection.md",
+      "heading": "Сколько приборов и какого размера",
+      "line_start": 55,
+      "line_end": 74,
+      "sha256_lf": "f45801faebc04a779c234b0836bd082f5277afea12dc2be7bf575239eb6a4884",
+      "section_sha256_lf": "ae9891bd05278cb91984484bdaa6c658d5e15b3edda07a05b1a22cd729d7439d",
+      "href": "knowledge/installation-guide/03-radiator-selection.md#сколько-приборов-и-какого-размера"
+    },
+    "g03.place": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/03-radiator-selection.md",
+      "heading": "Где устанавливать",
+      "line_start": 75,
+      "line_end": 98,
+      "sha256_lf": "f45801faebc04a779c234b0836bd082f5277afea12dc2be7bf575239eb6a4884",
+      "section_sha256_lf": "b0a8ab7ae602d65b88a660a98d75a170b8d9b247729f47cf0348d3d8162012e3",
+      "href": "knowledge/installation-guide/03-radiator-selection.md#где-устанавливать"
+    },
+    "g04.two": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/04-radiator-connections.md",
+      "heading": "Двухтрубная система",
+      "line_start": 5,
+      "line_end": 32,
+      "sha256_lf": "208f11a6ded7dfe0f9c0035e34b1fa22a16faf0b3fb1edd26ffc2244d33bc6a2",
+      "section_sha256_lf": "6d5cefd597c157c7a71a74924e1311a0959fdc2f3e0a497d651f88f3d463cfbd",
+      "href": "knowledge/installation-guide/04-radiator-connections.md#двухтрубная-система"
+    },
+    "g04.hblock": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/04-radiator-connections.md",
+      "heading": "Заводское нижнее подключение и H-блок",
+      "line_start": 33,
+      "line_end": 52,
+      "sha256_lf": "208f11a6ded7dfe0f9c0035e34b1fa22a16faf0b3fb1edd26ffc2244d33bc6a2",
+      "section_sha256_lf": "b914c262bc06a710c908a5b3cce69447b845a206eb938c5e7e2a1331fc3ad84f",
+      "href": "knowledge/installation-guide/04-radiator-connections.md#заводское-нижнее-подключение-и-h-блок"
+    },
+    "g04.one": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/04-radiator-connections.md",
+      "heading": "Однотрубная обвязка",
+      "line_start": 53,
+      "line_end": 68,
+      "sha256_lf": "208f11a6ded7dfe0f9c0035e34b1fa22a16faf0b3fb1edd26ffc2244d33bc6a2",
+      "section_sha256_lf": "4f3d2f1a41b92c9b386e1a53767bcfb9a932b8e55479bc10be1d90ba0f3b3283",
+      "href": "knowledge/installation-guide/04-radiator-connections.md#однотрубная-обвязка"
+    },
+    "g04.joints": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/04-radiator-connections.md",
+      "heading": "Стыки и комплектация",
+      "line_start": 69,
+      "line_end": 82,
+      "sha256_lf": "208f11a6ded7dfe0f9c0035e34b1fa22a16faf0b3fb1edd26ffc2244d33bc6a2",
+      "section_sha256_lf": "6f8f62ef4bb078ae43cd0f32e8fece9ddd8833c9e19540767c95142498864c01",
+      "href": "knowledge/installation-guide/04-radiator-connections.md#стыки-и-комплектация"
+    },
+    "g05.flow": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md",
+      "heading": "Нагрузка и расход",
+      "line_start": 5,
+      "line_end": 30,
+      "sha256_lf": "327c02a27695c21153c0cc0dbe6a6baec55d2e65c663bbc646139212b18dc627",
+      "section_sha256_lf": "27e05f9c0e3a70c1f717d9425308f686bf6b4106bb38c8e3917694af05e20fad",
+      "href": "knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md#нагрузка-и-расход"
+    },
+    "g05.size": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md",
+      "heading": "Наружный размер и проходное сечение",
+      "line_start": 31,
+      "line_end": 49,
+      "sha256_lf": "327c02a27695c21153c0cc0dbe6a6baec55d2e65c663bbc646139212b18dc627",
+      "section_sha256_lf": "0952f77711200ca5d17d926c46287859c01fb2427a1f452180bfcf64f71551b2",
+      "href": "knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md#наружный-размер-и-проходное-сечение"
+    },
+    "g05.speed": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md",
+      "heading": "Предварительный подбор по скорости",
+      "line_start": 50,
+      "line_end": 73,
+      "sha256_lf": "327c02a27695c21153c0cc0dbe6a6baec55d2e65c663bbc646139212b18dc627",
+      "section_sha256_lf": "1ed54e9cf0f8471e7c5c2bdafc7aa5ab5286d86c1a7ac4c5bbb2b4a58ebb9eae",
+      "href": "knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md#предварительный-подбор-по-скорости"
+    },
+    "g05.loss": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md",
+      "heading": "Сопротивление пути",
+      "line_start": 74,
+      "line_end": 103,
+      "sha256_lf": "327c02a27695c21153c0cc0dbe6a6baec55d2e65c663bbc646139212b18dc627",
+      "section_sha256_lf": "b99c2b4fff9e6a0b7ac684842c2c6926a0875f1f4709d9b35dc67a48c12d0062",
+      "href": "knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md#сопротивление-пути"
+    },
+    "g05.pump": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md",
+      "heading": "Насос",
+      "line_start": 104,
+      "line_end": 118,
+      "sha256_lf": "327c02a27695c21153c0cc0dbe6a6baec55d2e65c663bbc646139212b18dc627",
+      "section_sha256_lf": "5849ad746fe0d7c3089e926165936874abedef6031fcc0bf7d8f962607e9389f",
+      "href": "knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md#насос"
+    },
+    "g05.balance": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md",
+      "heading": "Балансировка и повторная проверка",
+      "line_start": 119,
+      "line_end": 136,
+      "sha256_lf": "327c02a27695c21153c0cc0dbe6a6baec55d2e65c663bbc646139212b18dc627",
+      "section_sha256_lf": "77f6d3acf8a7692bfceaa9f3043d09de95e18b8843a8b367df5a148ef925f041",
+      "href": "knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md#балансировка-и-повторная-проверка"
+    },
+    "g06.material": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "Материал труб",
+      "line_start": 7,
+      "line_end": 25,
+      "sha256_lf": "a70efb65780805332b2fe1a71abf99342b2eab25df7ae9638f0b427d82b75305",
+      "section_sha256_lf": "e4b55e517549c6f01e0b3a85ca80cd4d071e5baadd4e28fd0c177040ae9de589",
+      "href": "knowledge/installation-guide/06-installation-and-commissioning.md#материал-труб"
+    },
+    "g06.prepare": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "Подготовка и размещение",
+      "line_start": 26,
+      "line_end": 36,
+      "sha256_lf": "a70efb65780805332b2fe1a71abf99342b2eab25df7ae9638f0b427d82b75305",
+      "section_sha256_lf": "d0a58995effcd1b41a374ebf8af49a834781a7fee9cbe5b227fef24484b3baba",
+      "href": "knowledge/installation-guide/06-installation-and-commissioning.md#подготовка-и-размещение"
+    },
+    "g06.route": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "Как прокладывать трубы",
+      "line_start": 37,
+      "line_end": 64,
+      "sha256_lf": "a70efb65780805332b2fe1a71abf99342b2eab25df7ae9638f0b427d82b75305",
+      "section_sha256_lf": "4783152b6bc16d9f7384b1a8f0438686735ac420d100a19c6e47bb67ab503c90",
+      "href": "knowledge/installation-guide/06-installation-and-commissioning.md#как-прокладывать-трубы"
+    },
+    "g06.expand": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "Изгибы, соединения и удлинение",
+      "line_start": 65,
+      "line_end": 82,
+      "sha256_lf": "a70efb65780805332b2fe1a71abf99342b2eab25df7ae9638f0b427d82b75305",
+      "section_sha256_lf": "b320f16d4c561c1c4d5e4fa0980cd012a64c9e1c5302e7139d9d122be88644de",
+      "href": "knowledge/installation-guide/06-installation-and-commissioning.md#изгибы-соединения-и-удлинение"
+    },
+    "g06.source": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "Что предусмотреть у источника",
+      "line_start": 83,
+      "line_end": 115,
+      "sha256_lf": "a70efb65780805332b2fe1a71abf99342b2eab25df7ae9638f0b427d82b75305",
+      "section_sha256_lf": "1e7136d08a32a1918c547f21606d0ac5ffb9aef8a73d5511f47b0bd21f76bdfe",
+      "href": "knowledge/installation-guide/06-installation-and-commissioning.md#что-предусмотреть-у-источника"
+    },
+    "g06.test": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "Испытания до закрытия конструкций",
+      "line_start": 116,
+      "line_end": 137,
+      "sha256_lf": "a70efb65780805332b2fe1a71abf99342b2eab25df7ae9638f0b427d82b75305",
+      "section_sha256_lf": "5b89f7796352ae59d573d1d1e23b2ba154ccc77480d978c8b8aae4eb648bd3c2",
+      "href": "knowledge/installation-guide/06-installation-and-commissioning.md#испытания-до-закрытия-конструкций"
+    },
+    "g06.start": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "Первый запуск и наладка",
+      "line_start": 138,
+      "line_end": 156,
+      "sha256_lf": "a70efb65780805332b2fe1a71abf99342b2eab25df7ae9638f0b427d82b75305",
+      "section_sha256_lf": "c06b533caf9d382fe52253ae89afdd839501acea6d1dc3aa8ad7f687c8ffffe8",
+      "href": "knowledge/installation-guide/06-installation-and-commissioning.md#первый-запуск-и-наладка"
+    },
+    "g08.readiness": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/08-rules-for-automatic-design.md",
+      "heading": "Степень готовности результата",
+      "line_start": 6,
+      "line_end": 16,
+      "sha256_lf": "51718ae4d89f6b60d0c88c1226d737dd096d93bfb0b562a713e4e02d56deb01d",
+      "section_sha256_lf": "1a4dada1418ac5dc963ccebd7f48aeec9e6b185821186590880a3a853fcbab30",
+      "href": "knowledge/installation-guide/08-rules-for-automatic-design.md#степень-готовности-результата"
+    },
+    "g08.sequence": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/08-rules-for-automatic-design.md",
+      "heading": "Последовательность зависимых решений",
+      "line_start": 17,
+      "line_end": 36,
+      "sha256_lf": "51718ae4d89f6b60d0c88c1226d737dd096d93bfb0b562a713e4e02d56deb01d",
+      "section_sha256_lf": "93e073a29504d24e61bc46d6fb0ae72036a000acbb441efbec8687e3a42af533",
+      "href": "knowledge/installation-guide/08-rules-for-automatic-design.md#последовательность-зависимых-решений"
+    },
+    "g08.rules": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/08-rules-for-automatic-design.md",
+      "heading": "Проверяемые правила",
+      "line_start": 37,
+      "line_end": 61,
+      "sha256_lf": "51718ae4d89f6b60d0c88c1226d737dd096d93bfb0b562a713e4e02d56deb01d",
+      "section_sha256_lf": "1dea113a541c92bdf9aa08f4dd8aafe13e14730b493537029f6ed93d0af2df4c",
+      "href": "knowledge/installation-guide/08-rules-for-automatic-design.md#проверяемые-правила"
+    },
+    "g08.catalog": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/08-rules-for-automatic-design.md",
+      "heading": "Какие характеристики понадобятся от реального каталога",
+      "line_start": 62,
+      "line_end": 77,
+      "sha256_lf": "51718ae4d89f6b60d0c88c1226d737dd096d93bfb0b562a713e4e02d56deb01d",
+      "section_sha256_lf": "c1b2ec87813db4a180be12706f44370e30b8f68675be581a53bbd9b7c71cac16",
+      "href": "knowledge/installation-guide/08-rules-for-automatic-design.md#какие-характеристики-понадобятся-от-реального-каталога"
+    },
+    "base.scope": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/README.md",
+      "heading": "Отопление частного дома: расчёт и монтаж",
+      "line_start": 1,
+      "line_end": 60,
+      "sha256_lf": "218543b84894c80ac702ea54fb3e610e1f8060c5e189395da087b007d53d29dc",
+      "section_sha256_lf": "218543b84894c80ac702ea54fb3e610e1f8060c5e189395da087b007d53d29dc",
+      "href": "knowledge/installation-guide/README.md#отопление-частного-дома-расчёт-и-монтаж"
+    },
+    "base.status": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/README.md",
+      "heading": "Статус чисел и правил",
+      "line_start": 32,
+      "line_end": 46,
+      "sha256_lf": "218543b84894c80ac702ea54fb3e610e1f8060c5e189395da087b007d53d29dc",
+      "section_sha256_lf": "4aa66a2423e119265edc47561bf8ce0bd1b569eb268aa268b7d533734a5e5896",
+      "href": "knowledge/installation-guide/README.md#статус-чисел-и-правил"
+    },
+    "base.sources": {
+      "kind": "engineering_base",
+      "file": "knowledge/installation-guide/sources.md",
+      "heading": "Источники и границы проверки",
+      "line_start": 1,
+      "line_end": 51,
+      "sha256_lf": "9d220d693168b535d15b7b134184e321b38b6443489ab2c88bee02cc54cc9070",
+      "section_sha256_lf": "9d220d693168b535d15b7b134184e321b38b6443489ab2c88bee02cc54cc9070",
+      "href": "knowledge/installation-guide/sources.md#источники-и-границы-проверки"
+    },
+    "policy.approach": {
+      "kind": "project_policy",
+      "file": "development-plan.md",
+      "heading": "Выбранный подход",
+      "line_start": 15,
+      "line_end": 42,
+      "sha256_lf": "bbf6fe30541f795b09b2fc3d9fff9f7fe843284534c537c0f7fbd233c1a1141e",
+      "section_sha256_lf": "2d4c4a2d095bc153e8780650584d2120d64c51b27824df5c81bb36f3a431942d",
+      "href": "development-plan.md#выбранный-подход"
+    },
+    "policy.service": {
+      "kind": "project_policy",
+      "file": "development-plan.md",
+      "heading": "Этап 4. Локальный сервис бота и диалог на правилах",
+      "line_start": 148,
+      "line_end": 175,
+      "sha256_lf": "bbf6fe30541f795b09b2fc3d9fff9f7fe843284534c537c0f7fbd233c1a1141e",
+      "section_sha256_lf": "7f23e230d506b0846a7f3a2676d5ce221bf26e91f211f5d752d502ed406846de",
+      "href": "development-plan.md#этап-4-локальный-сервис-бота-и-диалог-на-правилах"
+    },
+    "policy.future": {
+      "kind": "project_policy",
+      "file": "development-plan.md",
+      "heading": "Следующие сценарии",
+      "line_start": 241,
+      "line_end": 249,
+      "sha256_lf": "bbf6fe30541f795b09b2fc3d9fff9f7fe843284534c537c0f7fbd233c1a1141e",
+      "section_sha256_lf": "d526b9da323db6bf7465cf666aa7ea8d01a78f22bd3ebd836cbd56db848e91a9",
+      "href": "development-plan.md#следующие-сценарии"
+    },
+    "policy.dialog": {
+      "kind": "dialog_policy",
+      "file": "question-intents.md",
+      "heading": "Как читать разметку",
+      "line_start": 9,
+      "line_end": 19,
+      "sha256_lf": "065924458a3e5addac8bcf8f1f9e0fbe48ddc4ea93a22f4a513670fe0d2affbc",
+      "section_sha256_lf": "b68456606b78bc982656432eea68737872ae80ee6c1e682bd3ca88668768f8e1",
+      "href": "question-intents.md#как-читать-разметку"
+    },
+    "policy.state": {
+      "kind": "dialog_policy",
+      "file": "question-intents.md",
+      "heading": "Формат данных и порядок ответа",
+      "line_start": 89,
+      "line_end": 100,
+      "sha256_lf": "065924458a3e5addac8bcf8f1f9e0fbe48ddc4ea93a22f4a513670fe0d2affbc",
+      "section_sha256_lf": "a4d5e9f3bcfaf074ef89f5ea8bba01835b65ec6922faf85578ff28985c914463",
+      "href": "question-intents.md#формат-данных-и-порядок-ответа"
+    },
+    "safety.gas": {
+      "kind": "safety_supplement",
+      "file": "safety-reference.md",
+      "heading": "Газ",
+      "line_start": 5,
+      "line_end": 8,
+      "sha256_lf": "f49be4b31e38316c66930b0b739c24fcdd57249d00f3cdcd5d97ed47cacc741b",
+      "section_sha256_lf": "1e0fa61ce8f67de9f1a1197e3d2b5fb2d1e2f727179b1f3cac8d8e147458092d",
+      "href": "safety-reference.md#газ"
+    },
+    "safety.co": {
+      "kind": "safety_supplement",
+      "file": "safety-reference.md",
+      "heading": "Угарный газ и дым",
+      "line_start": 9,
+      "line_end": 12,
+      "sha256_lf": "f49be4b31e38316c66930b0b739c24fcdd57249d00f3cdcd5d97ed47cacc741b",
+      "section_sha256_lf": "f1031fd7af93a84b6df1a8dc52752f6e3425943601acccd9ae3856f4e1f9d26c",
+      "href": "safety-reference.md#угарный-газ-и-дым"
+    },
+    "safety.electric": {
+      "kind": "safety_supplement",
+      "file": "safety-reference.md",
+      "heading": "Электрическая опасность",
+      "line_start": 13,
+      "line_end": 16,
+      "sha256_lf": "f49be4b31e38316c66930b0b739c24fcdd57249d00f3cdcd5d97ed47cacc741b",
+      "section_sha256_lf": "15a919f777cea0a13820d6496dd3829eb985826f10d0288d83627593b34b0c4f",
+      "href": "safety-reference.md#электрическая-опасность"
+    },
+    "safety.hot": {
+      "kind": "safety_supplement",
+      "file": "safety-reference.md",
+      "heading": "Горячая утечка и кипение котла",
+      "line_start": 17,
+      "line_end": 22,
+      "sha256_lf": "f49be4b31e38316c66930b0b739c24fcdd57249d00f3cdcd5d97ed47cacc741b",
+      "section_sha256_lf": "ce7fd0cd356b3b5696aa4f1bc68a3fc8375ed4b3fc591e36812da073943ffe7c",
+      "href": "safety-reference.md#горячая-утечка-и-кипение-котла"
+    },
+    "safety.protection": {
+      "kind": "safety_supplement",
+      "file": "safety-reference.md",
+      "heading": "Защитные устройства",
+      "line_start": 23,
+      "line_end": 28,
+      "sha256_lf": "f49be4b31e38316c66930b0b739c24fcdd57249d00f3cdcd5d97ed47cacc741b",
+      "section_sha256_lf": "0353240b75631a0b968d0ae5215c6b9ddfe3e4e8063870e945c46245030ade79",
+      "href": "safety-reference.md#защитные-устройства"
+    }
+  },
+  "external_sources": [
+    {
+      "id": "mchs.gas",
+      "title": "МЧС Санкт-Петербурга: правила безопасной эксплуатации бытовых газовых приборов",
+      "url": "https://78.mchs.gov.ru/deyatelnost/propaganda/propaganda-sredi-naseleniya/polezno-znat/pravila-polzovaniya-bytovymi-i-gazovymi-priborami",
+      "published_on": null,
+      "checked_on": "2026-10-30",
+      "supports": [
+        "Исключение огня и переключений электроприборов",
+        "Выход из загазованной зоны",
+        "104/112 вне загазованного помещения"
+      ]
+    },
+    {
+      "id": "mchs.co",
+      "title": "МЧС Новосибирской области: угарный газ не прощает ошибок",
+      "url": "https://54.mchs.gov.ru/deyatelnost/press-centr/novosti/5848860",
+      "published_on": "2026-10-27",
+      "checked_on": "2026-10-30",
+      "supports": [
+        "Свежий воздух при признаках отравления",
+        "112/103",
+        "Не подвергать себя риску при спасении"
+      ]
+    },
+    {
+      "id": "mchs.electric",
+      "title": "МЧС Санкт-Петербурга: бытовые возгорания",
+      "url": "https://78.mchs.gov.ru/deyatelnost/press-centr/novosti/5806912",
+      "published_on": "2026-08-10",
+      "checked_on": "2026-10-30",
+      "supports": [
+        "Отключение питания при запахе горелой проводки",
+        "Запрет воды для прибора под напряжением",
+        "Выход и 101/112 при пожарной опасности"
+      ]
+    },
+    {
+      "id": "mchs.emergency",
+      "title": "МЧС России: как правильно вызвать скорую",
+      "url": "https://mchs.gov.ru/deyatelnost/bezopasnost-grazhdan/kak-pravilno-vyzvat-skoruyu_5",
+      "published_on": null,
+      "checked_on": "2026-10-30",
+      "supports": [
+        "112 как единый номер экстренных служб в России",
+        "103 для скорой помощи"
+      ]
+    },
+    {
+      "id": "valtec.safety_group",
+      "title": "VALTEC: группы безопасности",
+      "url": "https://valtec.ru/catalog/armatura_bezopasnosti/gruppy_bezopasnosti/",
+      "published_on": null,
+      "checked_on": "2026-10-30",
+      "supports": [
+        "Типовой состав: предохранительный клапан, манометр, воздухоотводчик; без параметров конкретной модели"
+      ]
+    }
+  ],
+  "storage": "local_snapshot",
+  "upstream_manifest": "knowledge/installation-guide.upstream.json"
+}
