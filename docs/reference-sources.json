@@ -403,7 +403,7 @@
       "heading": "Выбранный подход",
       "line_start": 15,
       "line_end": 42,
-      "sha256_lf": "7bdb19ccf3b00db9e566108f75043373f9668580afca935fafaa1d0b1030edfa",
+      "sha256_lf": "a36522ddff2c9052c0f644624ab091301f798e8aaef6155ef1ea144b558eb7e1",
       "section_sha256_lf": "2d4c4a2d095bc153e8780650584d2120d64c51b27824df5c81bb36f3a431942d",
       "href": "development-plan.md#выбранный-подход"
     },
@@ -413,8 +413,8 @@
       "heading": "Этап 4. Локальный сервис бота и диалог на правилах",
       "line_start": 148,
       "line_end": 175,
-      "sha256_lf": "7bdb19ccf3b00db9e566108f75043373f9668580afca935fafaa1d0b1030edfa",
-      "section_sha256_lf": "7f23e230d506b0846a7f3a2676d5ce221bf26e91f211f5d752d502ed406846de",
+      "sha256_lf": "a36522ddff2c9052c0f644624ab091301f798e8aaef6155ef1ea144b558eb7e1",
+      "section_sha256_lf": "43b753c41b125b2764c254e898ee50cee62f9fc49946b2cc74b6b180d596b111",
       "href": "development-plan.md#этап-4-локальный-сервис-бота-и-диалог-на-правилах"
     },
     "policy.future": {
@@ -423,7 +423,7 @@
       "heading": "Следующие сценарии",
       "line_start": 241,
       "line_end": 249,
-      "sha256_lf": "7bdb19ccf3b00db9e566108f75043373f9668580afca935fafaa1d0b1030edfa",
+      "sha256_lf": "a36522ddff2c9052c0f644624ab091301f798e8aaef6155ef1ea144b558eb7e1",
       "section_sha256_lf": "d526b9da323db6bf7465cf666aa7ea8d01a78f22bd3ebd836cbd56db848e91a9",
       "href": "development-plan.md#следующие-сценарии"
     },

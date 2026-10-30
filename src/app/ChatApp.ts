@@ -1,7 +1,7 @@
 import { ChatView } from '../components/ChatView';
 import { MessageInput } from '../components/MessageInput';
 import { Icons } from '../components/icons';
-import { ChatService } from '../services/ChatService';
+import { ApiChatProvider } from '../services/ApiChatProvider';
 import { StorageService } from '../services/StorageService';
 import type { ChatProvider, Conversation, Message } from '../types/chat';
 
@@ -17,15 +17,20 @@ export class ChatApp {
   private readonly notice: HTMLElement;
   private readonly liveStatus = document.createElement('div');
 
-  constructor(private readonly root: HTMLElement, private readonly service: ChatProvider = new ChatService()) {
+  constructor(private readonly root: HTMLElement, private readonly service: ChatProvider = new ApiChatProvider()) {
     this.root.innerHTML = `<div class="app-shell"><button class="sidebar-backdrop" aria-label="Закрыть меню"></button><aside class="sidebar"><a class="brand" href="./" aria-label="Тепло — главная"><span class="brand-icon">${Icons.get('heat')}</span><span>тепло<span class="brand-dot">.</span></span></a><div class="brand-caption">Есть вопрос — есть тепло</div><button class="new-chat">${Icons.get('plus')} Новый чат <span>↗</span></button><div class="history-label">ВАШИ ДИАЛОГИ</div><nav class="history" aria-label="История чатов"></nav><div class="sidebar-bottom"><div class="local-card"><span class="local-icon">${Icons.get('shield')}</span><div><strong>Остаётся на устройстве</strong><p>История хранится в браузере</p></div></div><div class="sidebar-footer"><span class="avatar">Т</span><div><strong>Локальное пространство</strong><span>Ваш личный помощник</span></div><span class="online-dot"></span></div></div></aside><main class="main"><header class="topbar"><div class="topbar-left"><button class="menu-button icon-button" aria-label="Открыть меню">${Icons.get('menu')}</button><span class="page-title">Новый диалог</span></div><span class="demo-badge"><span></span> Демо-режим</span></header><div class="conversation-area"></div><footer class="chat-footer"><div class="demo-notice">Локальная модель пока не подключена · Ответы демонстрационные</div><div class="input-mount"></div><p class="footer-note">Помощник может ошибаться. Важные решения сверяйте с документацией оборудования.</p><div class="storage-notice" role="status"></div></footer></main></div>`;
     this.history = this.root.querySelector('.history')!;
     this.title = this.root.querySelector('.page-title')!;
     this.notice = this.root.querySelector('.storage-notice')!;
+    this.setConnection(this.service.mode === 'demo' ? 'Демо-режим' : 'Проверка сервиса…');
+    this.root.querySelector('.demo-notice')!.textContent = this.service.mode === 'demo'
+      ? 'Демо-режим · Ответы демонстрационные'
+      : 'Расход воды · Локальный сервис на правилах · Без нейросети';
+    if (this.service.checkConnection) void this.service.checkConnection().then(online => this.setConnection(online ? 'Сервис подключён' : 'Сервис недоступен'));
     this.liveStatus.className = 'sr-only';
     this.liveStatus.setAttribute('role', 'status');
     this.root.append(this.liveStatus);
-    this.view = new ChatView(question => { void this.send(question); });
+    this.view = new ChatView(question => { void this.send(question); }, this.service.mode === 'demo');
     this.input = new MessageInput(text => { void this.send(text); }, () => this.controller?.abort());
     this.root.querySelector('.conversation-area')!.append(this.view.element);
     this.root.querySelector('.input-mount')!.append(this.input.element);
@@ -36,6 +41,10 @@ export class ChatApp {
     this.root.addEventListener('keydown', event => { if (event.key === 'Escape') this.toggleSidebar(false); });
     window.addEventListener('pagehide', () => this.persist());
     this.refresh();
+  }
+
+  private setConnection(text: string): void {
+    this.root.querySelector('.demo-badge')!.textContent = text;
   }
 
   private select(id: string | undefined): void {
@@ -106,7 +115,7 @@ export class ChatApp {
     chat.updatedAt = new Date().toISOString();
     chat.messages.push({ id: crypto.randomUUID(), role: 'user', content: text, createdAt: chat.updatedAt });
     const context = [...chat.messages];
-    const response: Message = { id: crypto.randomUUID(), role: 'assistant', content: '', createdAt: chat.updatedAt };
+    const response: Message = { id: crypto.randomUUID(), role: 'assistant', content: '', createdAt: chat.updatedAt, mode: this.service.mode ?? 'local' };
     chat.messages.push(response);
     const controller = new AbortController();
     this.controller = controller;
@@ -115,18 +124,27 @@ export class ChatApp {
     this.persist();
     this.refresh();
     try {
-      for await (const chunk of this.service.stream(context, controller.signal)) {
+      for await (const chunk of this.service.stream(context, controller.signal, chat.state)) {
         controller.signal.throwIfAborted();
-        response.content += chunk;
+        if (typeof chunk === 'string') response.content += chunk;
+        else {
+          response.content = chunk.content;
+          response.sources = chunk.sources;
+          response.choices = chunk.choices;
+          response.clarification = chunk.clarification;
+          chat.state = chunk.state;
+        }
         if (this.activeId === chat.id) this.view.updateMessage(response);
       }
       this.liveStatus.textContent = 'Ответ готов.';
+      if (this.service.mode !== 'demo') this.setConnection('Сервис подключён');
     } catch (error) {
       if (controller.signal.aborted) {
         response.content = response.content.trimEnd() + '\n\n[Ответ остановлен]';
         this.liveStatus.textContent = 'Ответ остановлен.';
       } else {
-        response.content = response.content.trimEnd() + '\n\nНе удалось получить ответ. Попробуйте отправить вопрос ещё раз.';
+        response.content = response.content.trimEnd() + '\n\n' + (error instanceof Error ? error.message : 'Не удалось получить ответ. Попробуйте отправить вопрос ещё раз.');
+        if (this.service.mode !== 'demo') this.setConnection('Ошибка запроса');
         this.liveStatus.textContent = 'Не удалось получить ответ.';
         console.error('Chat response failed', error);
       }

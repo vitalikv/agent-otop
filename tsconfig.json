@@ -10,5 +10,5 @@
     "noUnusedParameters": true,
     "skipLibCheck": true
   },
-  "include": ["src"]
+  "include": ["src", "shared", "vite.config.ts"]
 }

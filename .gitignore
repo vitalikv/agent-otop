@@ -1,4 +1,8 @@
 node_modules/
 dist/
+dist-server/
+.npm-cache/
+.test-build/
 data/generated/
 *.local
+.env

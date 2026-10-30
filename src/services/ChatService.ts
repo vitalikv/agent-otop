@@ -1,7 +1,8 @@
 import type { ChatProvider, Message } from '../types/chat';
 
-/** Replace this provider with a local server adapter when connecting the model. */
+/** Explicitly selected demo provider for interface development. */
 export class ChatService implements ChatProvider {
+  readonly mode = 'demo' as const;
   async *stream(messages: readonly Message[], signal: AbortSignal): AsyncIterable<string> {
     const question = messages.filter(m => m.role === 'user').at(-1)?.content.toLowerCase() ?? '';
     const answer = this.answer(question);

@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.server.json",
+  "compilerOptions": { "outDir": ".test-build", "lib": ["ES2022", "DOM", "DOM.Iterable"] },
+  "include": ["server", "shared", "tests", "src/services/ApiChatProvider.ts", "src/services/StorageService.ts"]
+}

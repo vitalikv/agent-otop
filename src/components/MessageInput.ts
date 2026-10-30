@@ -8,7 +8,7 @@ export class MessageInput {
 
   constructor(onSend: (text: string) => void, onStop: () => void) {
     this.element.className = 'composer';
-    this.element.innerHTML = `<label class="sr-only" for="message">Ваш вопрос по отоплению</label><textarea id="message" rows="1" maxlength="8000" placeholder="Спросите что-нибудь об отоплении…"></textarea><div class="composer-bottom"><span>Enter — отправить <span class="key-divider">/</span> Shift + Enter — новая строка</span><button class="send-button" type="submit" aria-label="Отправить сообщение">${Icons.get('arrow')}</button></div>`;
+    this.element.innerHTML = `<label class="sr-only" for="message">Ваш вопрос по отоплению</label><textarea id="message" rows="1" maxlength="4000" placeholder="Спросите что-нибудь об отоплении…"></textarea><div class="composer-bottom"><span>Enter — отправить <span class="key-divider">/</span> Shift + Enter — новая строка</span><button class="send-button" type="submit" aria-label="Отправить сообщение">${Icons.get('arrow')}</button></div>`;
     this.textarea = this.element.querySelector('textarea')!;
     this.button = this.element.querySelector('button')!;
     this.element.addEventListener('submit', event => {

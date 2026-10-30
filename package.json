@@ -4,14 +4,20 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1",
-    "build": "tsc --noEmit && vite build",
+    "dev": "node scripts/dev.mjs",
+    "dev:ui": "vite --host 127.0.0.1",
+    "dev:server": "node scripts/dev.mjs --server-only",
+    "build": "tsc --noEmit && tsc -p tsconfig.server.json && vite build",
+    "build:server": "tsc -p tsconfig.server.json",
+    "start:server": "node dist-server/server/index.js",
+    "test": "tsc -p tsconfig.tests.json && node --test .test-build/tests/*.test.js",
     "preview": "vite preview --host 127.0.0.1",
     "data:prepare": "node scripts/check-reference-answers.mjs && node scripts/prepare-knowledge.mjs",
     "data:check": "node scripts/check-reference-answers.mjs && node --test scripts/check-knowledge-data.test.mjs scripts/check-pressure-data.test.mjs scripts/check-stage3-data.test.mjs",
     "data:check-generated": "node scripts/prepare-knowledge.mjs --check"
   },
   "devDependencies": {
+    "@types/node": "^22.20.5",
     "typescript": "~5.9.3",
     "vite": "^7.2.2"
   }
