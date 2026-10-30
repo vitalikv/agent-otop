@@ -38,15 +38,24 @@ export interface IntentExplanation {
 interface Bundle {
   schema_version: number;
   provenance: { inputs: { file: string; sha256_lf: string }[] };
-  chunks: (SourceRecord & { id: string; sha256_lf: string })[];
+  chunks: (SourceRecord & { id: string; chapter: string; sha256_lf: string })[];
   supporting_sources: Record<string, SourceRecord>;
   intent_explanations: { records: IntentExplanation[] };
+  terminology: { records: { id: string; aliases: string[] }[] };
   calculators: FlowDefinition[];
   reference_answers: Reference[];
 }
 
 export class KnowledgeBase {
-  private constructor(readonly flow: FlowDefinition, private readonly sources: Map<string, SourceRecord>, private readonly references: Reference[], private readonly intents: Map<string, IntentExplanation>) {}
+  private constructor(
+    readonly flow: FlowDefinition,
+    private readonly sources: Map<string, SourceRecord>,
+    private readonly references: Reference[],
+    private readonly intents: Map<string, IntentExplanation>,
+    /** Complete sections of the engineering base, in book order: the search corpus. */
+    readonly passages: { id: string; chapter: string; heading: string; text: string }[],
+    readonly terms: { id: string; aliases: string[] }[],
+  ) {}
 
   static async load(root: string): Promise<KnowledgeBase> {
     try {
@@ -86,7 +95,10 @@ export class KnowledgeBase {
         intents.set(record.id, record);
       }
       if (!intents.has('hydraulics.flow')) throw new Error('Нет объяснений намерений.');
-      return new KnowledgeBase(flow, sources, references, intents);
+      const terms = (bundle.terminology?.records ?? []).map(({ id, aliases }) => ({ id, aliases }));
+      if (!terms.length || terms.some(term => !term.id || !Array.isArray(term.aliases) || !term.aliases.length)) throw new Error('Нет словаря терминов.');
+      const passages = bundle.chunks.map(({ id, chapter, heading, text }) => ({ id, chapter, heading, text }));
+      return new KnowledgeBase(flow, sources, references, intents, passages, terms);
     } catch (error) {
       throw new Error(`Не удалось загрузить базу. Выполните npm run data:prepare и npm run data:check-generated. ${error instanceof Error ? error.message : String(error)}`);
     }

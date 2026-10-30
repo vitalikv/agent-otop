@@ -4,11 +4,12 @@ import { isDialogState, isRecord } from '../../shared/validation.js';
 
 export class ApiChatProvider implements ChatProvider {
   readonly mode = 'local' as const;
-  constructor(private readonly baseUrl = '/api', private readonly timeoutMs = 10000) {}
+  // A language-model answer takes seconds; the rules answer at once, so the long limit only matters for the model.
+  constructor(private readonly baseUrl = '/api', private readonly timeoutMs = 120000) {}
 
   async checkConnection(): Promise<boolean> {
     try {
-      const response = await fetch(`${this.baseUrl}/health`, { signal: AbortSignal.timeout(this.timeoutMs) });
+      const response = await fetch(`${this.baseUrl}/health`, { signal: AbortSignal.timeout(Math.min(this.timeoutMs, 10000)) });
       const data: unknown = await response.json();
       return response.ok && isRecord(data) && data.status === 'ok' && data.data === 'loaded';
     } catch { return false; }

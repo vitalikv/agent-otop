@@ -4,6 +4,8 @@ import type { ChatRequest } from '../shared/chat.js';
 import { AssistantService } from './AssistantService.js';
 import { KnowledgeBase } from './KnowledgeBase.js';
 import type { IntentPredictor } from './IntentClassifier.js';
+import type { LlmResponder } from './LlmResponder.js';
+import { LlmUnavailableError } from './LlmClient.js';
 
 class HttpError extends Error { constructor(readonly status: number, message: string) { super(message); } }
 const maxBodyBytes = 64 * 1024;
@@ -22,7 +24,11 @@ export function validateRequest(value: unknown): ChatRequest {
 
 export class ChatController {
   private readonly assistant: AssistantService;
-  constructor(private readonly knowledge: KnowledgeBase, private readonly classifier?: IntentPredictor) { this.assistant = new AssistantService(knowledge, classifier); }
+  private readonly engine: string;
+  constructor(private readonly knowledge: KnowledgeBase, classifier?: IntentPredictor, llm?: LlmResponder) {
+    this.assistant = new AssistantService(knowledge, classifier, llm);
+    this.engine = llm ? 'rules+llm' : classifier ? 'rules+network' : 'rules';
+  }
   createServer() {
     const server = createServer((request, response) => { void this.handle(request, response); });
     server.requestTimeout = 15000;
@@ -39,7 +45,7 @@ export class ChatController {
       if (!/^(?:127\.0\.0\.1|localhost)(?::\d+)?$/.test(host)) throw new HttpError(403, 'Разрешены только локальные запросы.');
       if (request.headers.origin && !/^http:\/\/(?:127\.0\.0\.1|localhost)(?::\d+)?$/.test(request.headers.origin)) throw new HttpError(403, 'Недопустимый источник запроса.');
       const path = new URL(request.url ?? '/', 'http://127.0.0.1').pathname;
-      if (path === '/api/health' && request.method === 'GET') { json(200, { status: 'ok', data: 'loaded', scenario: 'hydraulics.flow', engine: this.classifier ? 'rules+network' : 'rules', stateful: false }); return; }
+      if (path === '/api/health' && request.method === 'GET') { json(200, { status: 'ok', data: 'loaded', scenario: 'hydraulics.flow', engine: this.engine, stateful: false }); return; }
       if (path.startsWith('/api/sources/') && request.method === 'GET') {
         const text = this.knowledge.sourceText(decodeURIComponent(path.slice('/api/sources/'.length)));
         if (!text) throw new HttpError(404, 'Источник не найден.');
@@ -63,9 +69,10 @@ export class ChatController {
       });
       let value: unknown;
       try { value = JSON.parse(body); } catch { throw new HttpError(400, 'Некорректный JSON.'); }
-      json(200, this.assistant.answer(validateRequest(value)));
+      json(200, await this.assistant.reply(validateRequest(value)));
     } catch (error) {
-      if (!response.destroyed) json(error instanceof HttpError ? error.status : 500, { error: error instanceof HttpError ? error.message : 'Не удалось обработать запрос. Проверьте параметры и повторите отправку.' });
+      const known = error instanceof HttpError ? error : error instanceof LlmUnavailableError ? new HttpError(503, `${error.message} Повторите отправку позже.`) : undefined;
+      if (!response.destroyed) json(known?.status ?? 500, { error: known?.message ?? 'Не удалось обработать запрос. Проверьте параметры и повторите отправку.' });
     }
   }
 }
