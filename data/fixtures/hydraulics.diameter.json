@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "origin": "explicit_synthetic_development_cases",
+  "independent_test_set": false,
+  "professional_reviewed": false,
+  "notes": "Учебный подбор внутреннего прохода по явно выбранной скорости; не готовый наружный типоразмер трубы.",
+  "cases": [
+    {"id": "flow-400-speed-half", "reference_id": "SYN-064", "input": {"method": "by_velocity", "flow_l_h": 400, "velocity_m_s": 0.5}, "expected": {"status": "ready", "values": {"pipe_inner_mm": 16.8208834801344}}},
+    {"id": "speed-required", "input": {"method": "by_velocity", "flow_l_h": 400}, "expected": {"status": "clarify", "issues": ["velocity_m_s"]}},
+    {"id": "null-speed", "input": {"method": "by_velocity", "flow_l_h": 400, "velocity_m_s": null}, "expected": {"status": "clarify", "issues": ["velocity_m_s"]}},
+    {"id": "zero-speed", "input": {"method": "by_velocity", "flow_l_h": 400, "velocity_m_s": 0}, "expected": {"status": "invalid", "issues": ["velocity_m_s"]}},
+    {"id": "negative-speed", "input": {"method": "by_velocity", "flow_l_h": 400, "velocity_m_s": -0.5}, "expected": {"status": "invalid", "issues": ["velocity_m_s"]}},
+    {"id": "zero-flow-no-diameter-selection", "input": {"method": "by_velocity", "flow_l_h": 0, "velocity_m_s": 0.5}, "expected": {"status": "invalid", "issues": ["flow_l_h"]}},
+    {"id": "no-string-coercion", "input": {"method": "by_velocity", "flow_l_h": "400", "velocity_m_s": 0.5}, "expected": {"status": "invalid", "issues": ["flow_l_h"]}},
+    {"id": "outer-size-not-an-input", "input": {"method": "by_velocity", "flow_l_h": 400, "velocity_m_s": 0.5, "pipe_outer_mm": 20}, "expected": {"status": "invalid", "issues": ["pipe_outer_mm"]}}
+  ]
+}

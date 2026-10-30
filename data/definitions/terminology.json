@@ -1,0 +1,469 @@
+{
+  "schema_version": 1,
+  "status": "source_aligned_not_professionally_reviewed",
+  "catalog_origin": {
+    "original_file_available": false,
+    "requested_path": "src-heating/threeApp/heating/catalog/catalogDescriptions.ts",
+    "evidence_file": "docs/development-plan.md",
+    "evidence_heading": "Исходные материалы",
+    "evidence_quote": "названия деталей и разговорные синонимы («американка», «футорка», «МП», «PPR»)",
+    "limitation": "Исходный файл отсутствует в доступной копии skeleton-wf. Использовано только локально зафиксированное перечисление терминов; описания, артикулы и свойства каталога не выдумываются."
+  },
+  "rules": [
+    "Учитывать отрицания и контекст до выбора значения.",
+    "Синоним не подтверждает совместимость, модель или численные свойства.",
+    "Не заменять произвольные кириллические и латинские буквы во всём тексте."
+  ],
+  "ambiguous_terms": [
+    {
+      "alias": "перепад",
+      "candidates": [
+        "pressure_drop",
+        "water_cooling"
+      ],
+      "action": "clarify_quantity_and_units"
+    },
+    {
+      "alias": "напор",
+      "candidates": [
+        "hydraulic_head",
+        "radiator_temperature_head"
+      ],
+      "action": "use_context_or_clarify"
+    },
+    {
+      "alias": "обратный",
+      "candidates": [
+        "check_valve",
+        "return_setting_valve"
+      ],
+      "action": "clarify_function"
+    }
+  ],
+  "records": [
+    {
+      "id": "radiator",
+      "aliases": [
+        "радиатор",
+        "батарея"
+      ],
+      "source_ids": [
+        "g03.types"
+      ],
+      "note": "Разговорное название не задаёт модель и мощность.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "metal_polymer",
+      "aliases": [
+        "МП",
+        "металлополимер",
+        "металлопластик"
+      ],
+      "source_ids": [
+        "g06.material"
+      ],
+      "note": "Серия, стенка и совместимость фитинга проверяются отдельно.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "polypropylene",
+      "aliases": [
+        "ПП",
+        "PP-R",
+        "PP-RCT",
+        "PPR",
+        "полипропилен"
+      ],
+      "source_ids": [
+        "g06.material",
+        "project.catalog-vocabulary"
+      ],
+      "note": "PPR — написание из локального упоминания каталога; свойства серии не назначаются.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "pe_x",
+      "aliases": [
+        "PE-X",
+        "PEX",
+        "сшитый полиэтилен"
+      ],
+      "source_ids": [
+        "g06.material"
+      ],
+      "note": "Название не гарантирует наличие кислородозащитного слоя.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "pe_rt",
+      "aliases": [
+        "PE-RT",
+        "PERT"
+      ],
+      "source_ids": [
+        "g06.material"
+      ],
+      "note": "Не приравнивать к любой другой трубной системе.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "h_block",
+      "aliases": [
+        "H-блок",
+        "Н-блок",
+        "узел нижнего подключения"
+      ],
+      "source_ids": [
+        "g04.hblock"
+      ],
+      "note": "Кириллическое Н и латинское H нормализуются только в обозначении блока. Назначение одно- или двухтрубное уточняется.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "thermostatic_head",
+      "aliases": [
+        "термоголовка",
+        "термостатическая головка"
+      ],
+      "source_ids": [
+        "g04.two"
+      ],
+      "note": "Управляет температурой комнаты, не измеряет расход.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "thermostatic_valve",
+      "aliases": [
+        "термоклапан",
+        "термостатический клапан"
+      ],
+      "source_ids": [
+        "g04.two"
+      ],
+      "note": "Совместимость головки, направление и преднастройка зависят от изделия.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "return_setting_valve",
+      "aliases": [
+        "клапан на обратке",
+        "настроечный клапан"
+      ],
+      "source_ids": [
+        "g04.two"
+      ],
+      "note": "Не является синонимом обратного клапана.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "check_valve",
+      "aliases": [
+        "обратный клапан"
+      ],
+      "source_ids": [
+        "g04.two"
+      ],
+      "note": "Не подменять клапаном для настройки обратки; нужны назначение и паспорт.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "ball_valve",
+      "aliases": [
+        "шаровой кран"
+      ],
+      "source_ids": [
+        "g04.two"
+      ],
+      "note": "Не принимать за балансировочный клапан.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "union_candidate",
+      "aliases": [
+        "американка"
+      ],
+      "source_ids": [
+        "project.catalog-vocabulary",
+        "g04.joints"
+      ],
+      "note": "Каталожное разговорное название разъёмного соединения; точное исполнение и посадку уточнить.",
+      "normalization": "candidate_requires_clarification"
+    },
+    {
+      "id": "adapter_candidate",
+      "aliases": [
+        "футорка"
+      ],
+      "source_ids": [
+        "project.catalog-vocabulary",
+        "g04.joints"
+      ],
+      "note": "Нужен конкретный переходник, резьбы, направление и уплотнение; название не подтверждает совместимость.",
+      "normalization": "candidate_requires_clarification"
+    },
+    {
+      "id": "air_vent",
+      "aliases": [
+        "воздухоотводчик"
+      ],
+      "source_ids": [
+        "g04.two"
+      ],
+      "note": "Доступ и предусмотренное место проверяются по прибору.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "manifold",
+      "aliases": [
+        "коллектор",
+        "гребёнка"
+      ],
+      "source_ids": [
+        "g02.rays"
+      ],
+      "note": "Число выходов, расход и присоединения проверяются по паспорту.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "dead_end_layout",
+      "aliases": [
+        "двухтрубная тупиковая",
+        "тупиковая схема"
+      ],
+      "source_ids": [
+        "g02.dead"
+      ],
+      "note": "Приборы подключаются параллельно между подачей и обраткой.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "reverse_return_layout",
+      "aliases": [
+        "попутная схема",
+        "петля Тихельмана",
+        "Тихельман"
+      ],
+      "source_ids": [
+        "g02.return"
+      ],
+      "note": "Порядок подключения не заменяет гидравлическую проверку.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "radial_layout",
+      "aliases": [
+        "лучевая схема",
+        "коллекторная схема"
+      ],
+      "source_ids": [
+        "g02.rays"
+      ],
+      "note": "Одна пара линий соответствует контуру прибора.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "one_pipe_layout",
+      "aliases": [
+        "однотрубная схема",
+        "однотрубка"
+      ],
+      "source_ids": [
+        "g02.one"
+      ],
+      "note": "Нужны байпас, деление потока и смешение.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "bypass",
+      "aliases": [
+        "байпас",
+        "обходной путь"
+      ],
+      "source_ids": [
+        "g04.one"
+      ],
+      "note": "Внешний и встроенный байпас не добавляют одновременно без обоснования.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "outer_diameter",
+      "aliases": [
+        "наружный диаметр",
+        "наружный размер"
+      ],
+      "source_ids": [
+        "g05.size"
+      ],
+      "note": "Нужна стенка; не DN и не резьбовой дюйм.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "inner_diameter",
+      "aliases": [
+        "внутренний диаметр",
+        "проход трубы"
+      ],
+      "source_ids": [
+        "g05.size"
+      ],
+      "note": "Проход фитинга учитывается отдельно.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "nominal_size",
+      "aliases": [
+        "DN",
+        "Ду"
+      ],
+      "source_ids": [
+        "g05.size"
+      ],
+      "note": "Условное обозначение не равно фактическому внутреннему или наружному диаметру.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "volume_flow",
+      "aliases": [
+        "объёмный расход",
+        "л/ч",
+        "м³/ч"
+      ],
+      "source_ids": [
+        "g05.flow"
+      ],
+      "note": "Единицы не являются самостоятельным намерением; массовый расход требует другого преобразования.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "mass_flow",
+      "aliases": [
+        "массовый расход",
+        "кг/с"
+      ],
+      "source_ids": [
+        "g05.flow"
+      ],
+      "note": "Для перевода в объёмный расход нужна плотность.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "water",
+      "aliases": [
+        "вода",
+        "обычная вода"
+      ],
+      "source_ids": [
+        "g05.flow"
+      ],
+      "note": "Учитывать отрицания; не вода не подтверждает воду.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "mixture",
+      "aliases": [
+        "гликоль",
+        "антифриз",
+        "незамерзайка"
+      ],
+      "source_ids": [
+        "g05.flow",
+        "g06.source"
+      ],
+      "note": "Разговорное имя не задаёт состав, концентрацию, допустимость и свойства.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "water_cooling",
+      "aliases": [
+        "охлаждение воды",
+        "разность температур подачи и обратки"
+      ],
+      "source_ids": [
+        "g05.flow"
+      ],
+      "note": "Не температурный напор радиатора относительно воздуха.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "radiator_temperature_head",
+      "aliases": [
+        "температурный напор радиатора"
+      ],
+      "source_ids": [
+        "g03.power"
+      ],
+      "note": "Отличать от охлаждения воды и гидравлического напора.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "pressure_drop",
+      "aliases": [
+        "перепад давления",
+        "потеря давления"
+      ],
+      "source_ids": [
+        "g05.loss"
+      ],
+      "note": "Не давление заполнения.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "hydraulic_head",
+      "aliases": [
+        "метры напора",
+        "напор насоса"
+      ],
+      "source_ids": [
+        "g05.pump"
+      ],
+      "note": "Не высота этажа замкнутой заполненной системы.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "operating_kv",
+      "aliases": [
+        "Kv"
+      ],
+      "source_ids": [
+        "g05.loss"
+      ],
+      "note": "Kv реальной настройки не подменяется Kvs.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "fully_open_kvs",
+      "aliases": [
+        "Kvs"
+      ],
+      "source_ids": [
+        "g05.loss"
+      ],
+      "note": "Коэффициент полностью открытого изделия; нужно подтвердить рабочее положение.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "pipe_expansion",
+      "aliases": [
+        "температурное удлинение",
+        "линейное расширение трубы"
+      ],
+      "source_ids": [
+        "g06.expand"
+      ],
+      "note": "Не объёмное расширение теплоносителя и не подбор расширительного бака.",
+      "normalization": "contextual_term_not_product_identity"
+    },
+    {
+      "id": "safety_group",
+      "aliases": [
+        "группа безопасности"
+      ],
+      "source_ids": [
+        "g06.source"
+      ],
+      "note": "Состав и уставки проверяются по источнику; универсального давления нет.",
+      "normalization": "contextual_term_not_product_identity"
+    }
+  ]
+}

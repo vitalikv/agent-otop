@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "origin": "explicit_synthetic_development_cases",
+  "independent_test_set": false,
+  "professional_reviewed": false,
+  "notes": "Структурированные учебные входы; не результат разбора текста и не паспортные размеры изделий. Табличные размеры применимы только к указанной стенке.",
+  "cases": [
+    {"id": "marked-20x2.8", "reference_id": "SYN-055", "input": {"method": "outer_wall", "pipe_outer_mm": 20, "pipe_wall_mm": 2.8}, "expected": {"status": "ready", "values": {"pipe_inner_mm": 14.4}}},
+    {"id": "impossible-wall", "reference_id": "SYN-126", "input": {"method": "outer_wall", "pipe_outer_mm": 16, "pipe_wall_mm": 10}, "expected": {"status": "clarify", "issues": ["geometry_conflict"]}},
+    {"id": "table-16x2", "input": {"method": "outer_wall", "pipe_outer_mm": 16, "pipe_wall_mm": 2}, "expected": {"status": "ready", "values": {"pipe_inner_mm": 12}}},
+    {"id": "table-25x4.2", "input": {"method": "outer_wall", "pipe_outer_mm": 25, "pipe_wall_mm": 4.2}, "expected": {"status": "ready", "values": {"pipe_inner_mm": 16.6}}},
+    {"id": "wall-required", "input": {"method": "outer_wall", "pipe_outer_mm": 20}, "expected": {"status": "clarify", "issues": ["pipe_wall_mm", "pipe_dimensions"]}},
+    {"id": "null-wall", "input": {"method": "outer_wall", "pipe_outer_mm": 20, "pipe_wall_mm": null}, "expected": {"status": "clarify", "issues": ["pipe_wall_mm", "pipe_dimensions"]}},
+    {"id": "zero-bore", "input": {"method": "outer_wall", "pipe_outer_mm": 16, "pipe_wall_mm": 8}, "expected": {"status": "clarify", "issues": ["geometry_conflict"]}},
+    {"id": "zero-wall", "input": {"method": "outer_wall", "pipe_outer_mm": 16, "pipe_wall_mm": 0}, "expected": {"status": "invalid", "issues": ["pipe_wall_mm"]}},
+    {"id": "negative-outer", "input": {"method": "outer_wall", "pipe_outer_mm": -16, "pipe_wall_mm": 2}, "expected": {"status": "invalid", "issues": ["pipe_outer_mm"]}},
+    {"id": "dn-is-not-geometry", "input": {"method": "outer_wall", "dn": 20}, "expected": {"status": "invalid", "issues": ["dn"]}}
+  ]
+}

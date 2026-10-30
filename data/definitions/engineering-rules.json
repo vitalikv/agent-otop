@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "status": "source_aligned_not_professionally_reviewed",
+  "unknown_evidence": "unknown_is_not_passed",
+  "rules": [
+    {
+      "code": "Т-01",
+      "condition": "У каждой комнаты есть нагрузка с происхождением и расчётные температуры",
+      "on_failure": "Только эскиз; неизвестные потери не равны нулю",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "Т-02",
+      "condition": "Вычтена подтверждённая мощность других отопителей, нет двойного учёта воздуха и мостиков",
+      "on_failure": "Пересчитать баланс",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "Р-01",
+      "condition": "У радиатора известны модель, Qном, режим, метод пересчёта и допустимое подключение",
+      "on_failure": "Геометрический объект с неподтверждённой теплоотдачей",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "Р-02",
+      "condition": "Сумма фактических мощностей покрывает нагрузку комнаты",
+      "on_failure": "Показать дефицит в ваттах; изменить подбор",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "Р-03",
+      "condition": "Весь узел помещается с паспортными зазорами и доступом",
+      "on_failure": "Изменить место или состав, затем заново проверить мощность",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "С-01",
+      "condition": "Радиаторы двухтрубной схемы подключены между подачей и обраткой параллельно",
+      "on_failure": "Исправить схему",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "С-02",
+      "condition": "В попутной схеме подтверждён порядок подключения и выполнена гидравлическая проверка",
+      "on_failure": "Не считать её автоматически сбалансированной",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "С-03",
+      "condition": "В однотрубной схеме известны байпас, доли расходов, смешение и температуры приборов",
+      "on_failure": "Не подтверждать однотрубный расчёт",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "А-01",
+      "condition": "Арматура соответствует схеме, направлению, резьбе, посадке, трубе и её стенке",
+      "on_failure": "Подобрать совместимые изделия",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "А-02",
+      "condition": "Регулирование прибора сохраняет обязательный расход источника и проход однотрубной магистрали",
+      "on_failure": "Изменить управление или схему",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "Г-01",
+      "condition": "Участок рассчитан по суммарному проходящему расходу и реальному внутреннему диаметру",
+      "on_failure": "Не подтверждать диаметр",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "Г-02",
+      "condition": "Потери полного пути включают подачу, обратку и оборудование без двойного учёта",
+      "on_failure": "Пересчитать напор",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "Г-03",
+      "condition": "Насос обеспечивает рабочую точку и приемлемые частичные режимы",
+      "on_failure": "Пересмотреть диаметры, клапаны, насос или деление веток",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "М-01",
+      "condition": "Изгибы, опоры, изоляция и проходы реализуемы в конструкции дома",
+      "on_failure": "Изменить трассу, а не только её изображение",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "М-02",
+      "condition": "Разборные соединения и обслуживаемые детали доступны",
+      "on_failure": "Изменить расположение",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "Б-01",
+      "condition": "Проверены рабочие и предельные давления, бак и защита источника",
+      "on_failure": "Комплект перед монтажом не готов",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    },
+    {
+      "code": "П-01",
+      "condition": "Заданы программа испытаний, настройки и документы приёмки",
+      "on_failure": "Монтажный комплект неполон",
+      "source_id": "g08.rules",
+      "evaluation": "requires_explicit_evidence_not_keyword_match"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "pipe.size",
+  "status": "source_aligned_draft_not_professionally_reviewed",
+  "source_ids": ["g05.size"],
+  "scope": "Геометрический внутренний диаметр круглой трубы по наружному размеру и стенке. DN, дюйм резьбы и проход фитинга требуют данных конкретного изделия.",
+  "explanation": "Проход трубы зависит от наружного диаметра и толщины стенки. Из наружного диаметра вычитают две стенки. Одинаковый наружный размер у разных серий не гарантирует одинакового прохода.",
+  "parameters": {
+    "method": {"type": "enum", "values": ["outer_wall"], "description": "Расчёт по явно заданной геометрии круглой трубы."},
+    "pipe_outer_mm": {"type": "number", "unit": "mm", "exclusive_minimum": 0, "accepted_units": {"mm": 1, "m": 1000}, "description": "Наружный диаметр, не DN и не дюймовое обозначение резьбы."},
+    "pipe_wall_mm": {"type": "number", "unit": "mm", "exclusive_minimum": 0, "accepted_units": {"mm": 1, "m": 1000}, "description": "Толщина одной стенки заданной серии; по материалу или наружному размеру не угадывается."}
+  },
+  "common_validation": {
+    "numbers": "Только конечные числа в единицах контракта; значения не приводятся из строк.",
+    "missing": "Отсутствующие значения и null требуют уточнения. Значений по умолчанию нет.",
+    "geometry_alternatives": [["pipe_outer_mm", "pipe_wall_mm"]],
+    "geometry_relation": "pipe_outer_mm > 2 * pipe_wall_mm",
+    "geometry_conflict_action": "clarify_without_guessing_dimensions",
+    "unknown_fields": "reject"
+  },
+  "methods": {
+    "outer_wall": {
+      "required": ["pipe_outer_mm", "pipe_wall_mm"],
+      "uses_geometry_alternatives": true,
+      "requires_values": {},
+      "forbidden_parameters": [],
+      "formula": "pipe_inner_mm = pipe_outer_mm - 2 * pipe_wall_mm",
+      "outputs": {"pipe_inner_mm": "mm"},
+      "result_status": "geometric_pipe_bore_only",
+      "assumptions": ["Рассматривается круглая труба с заданной толщиной стенки; применимость геометрии проверена отдельно.", "Другие SDR и серии меняют проход. Сужение фитинга и реальный проход арматуры проверяются отдельно по их характеристикам."]
+    }
+  },
+  "clarifications": {
+    "pipe_dimensions": "Укажите наружный диаметр и толщину стенки в мм по полной маркировке или паспорту.",
+    "geometry_conflict": "Проверьте размер: наружный диаметр должен быть больше двух толщин стенки. Какая маркировка верна?"
+  },
+  "terms": [
+    {"canonical": "pipe_outer_mm", "aliases": ["наружный диаметр", "наружный размер"], "note": "Не равен DN и дюймовому обозначению резьбы."},
+    {"canonical": "pipe_wall_mm", "aliases": ["стенка", "толщина стенки"], "note": "Учитывается дважды при вычислении внутреннего диаметра."},
+    {"canonical": "pipe_inner_mm", "aliases": ["внутренний диаметр", "геометрический проход трубы"], "note": "Не подтверждает проход установленного фитинга."}
+  ],
+  "reference_answer_ids": ["SYN-055", "SYN-126"]
+}

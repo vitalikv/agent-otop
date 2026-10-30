@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "status": "source_aligned_not_professionally_reviewed",
+  "scope": "Дополнительные формулы главы 05. Это описания операций для будущего сервиса, а не автоматический расчёт режима течения или полного пути.",
+  "formulas": [
+    {
+      "id": "hydraulics.reynolds",
+      "source_id": "g05.loss",
+      "formula": "reynolds = density_kg_m3 * velocity_m_s * inner_m / viscosity_pa_s",
+      "inputs": {
+        "density_kg_m3": {
+          "type": "number",
+          "unit": "kg/m3",
+          "exclusive_minimum": 0
+        },
+        "velocity_m_s": {
+          "type": "number",
+          "unit": "m/s",
+          "minimum": 0
+        },
+        "inner_m": {
+          "type": "number",
+          "unit": "m",
+          "exclusive_minimum": 0
+        },
+        "viscosity_pa_s": {
+          "type": "number",
+          "unit": "Pa*s",
+          "exclusive_minimum": 0
+        }
+      },
+      "output": {
+        "unit": "dimensionless",
+        "number_status": "calculation_relationship"
+      },
+      "applicability": [
+        "Плотность и динамическая вязкость относятся к одному составу и рабочей температуре с источником свойств.",
+        "Число Рейнольдса само по себе здесь не выбирает универсальную аппроксимацию трения."
+      ],
+      "missing_data_action": "clarify_properties_geometry_and_regime",
+      "development_example": {
+        "origin": "synthetic_not_product_data",
+        "inputs": {
+          "density_kg_m3": 1000,
+          "velocity_m_s": 0.5,
+          "inner_m": 0.02,
+          "viscosity_pa_s": 0.001
+        },
+        "expected": 10000
+      },
+      "required": [
+        "density_kg_m3",
+        "velocity_m_s",
+        "inner_m",
+        "viscosity_pa_s"
+      ],
+      "result_status": "calculated_under_stated_conditions_not_full_path_validation"
+    },
+    {
+      "id": "hydraulics.laminar_friction",
+      "source_id": "g05.loss",
+      "formula": "darcy_lambda = 64 / reynolds",
+      "inputs": {
+        "reynolds": {
+          "type": "number",
+          "unit": "dimensionless",
+          "exclusive_minimum": 0
+        },
+        "regime": {
+          "type": "enum",
+          "values": [
+            "confirmed_laminar"
+          ]
+        }
+      },
+      "output": {
+        "unit": "dimensionless",
+        "number_status": "calculation_relationship"
+      },
+      "applicability": [
+        "Требуется подтверждённый ламинарный режим и применимая геометрия. Не использовать для переходной области и произвольного турбулентного режима.",
+        "Без подтверждения режима коэффициент не вычисляется молча."
+      ],
+      "missing_data_action": "clarify_or_use_applicable_manufacturer_method",
+      "development_example": {
+        "origin": "synthetic_not_product_data",
+        "inputs": {
+          "reynolds": 1000,
+          "regime": "confirmed_laminar"
+        },
+        "expected": 0.064
+      },
+      "required": [
+        "reynolds",
+        "regime"
+      ],
+      "result_status": "calculated_under_stated_conditions_not_full_path_validation"
+    },
+    {
+      "id": "hydraulics.darcy_loss",
+      "source_id": "g05.loss",
+      "formula": "pressure_pa = darcy_lambda * (length_m / inner_m) * density_kg_m3 * velocity_m_s^2 / 2",
+      "inputs": {
+        "darcy_lambda": {
+          "type": "number",
+          "unit": "dimensionless",
+          "exclusive_minimum": 0
+        },
+        "lambda_source": {
+          "type": "string"
+        },
+        "length_m": {
+          "type": "number",
+          "unit": "m",
+          "minimum": 0
+        },
+        "inner_m": {
+          "type": "number",
+          "unit": "m",
+          "exclusive_minimum": 0
+        },
+        "density_kg_m3": {
+          "type": "number",
+          "unit": "kg/m3",
+          "exclusive_minimum": 0
+        },
+        "velocity_m_s": {
+          "type": "number",
+          "unit": "m/s",
+          "minimum": 0
+        }
+      },
+      "output": {
+        "unit": "Pa",
+        "number_status": "calculation_relationship"
+      },
+      "applicability": [
+        "λ — коэффициент Дарси, не коэффициент Фаннинга. Он зависит от режима и относительной шероховатости; нужны источник и подтверждение применимости.",
+        "Расчёт одного прямого участка не включает автоматически обратку, арматуру, приборы и общие участки.",
+        "Одной длины ветки и количества углов недостаточно."
+      ],
+      "missing_data_action": "clarify_lambda_full_path_and_properties",
+      "development_example": {
+        "origin": "synthetic_not_product_data",
+        "inputs": {
+          "darcy_lambda": 0.03,
+          "lambda_source": "Учебный заданный коэффициент, не аппроксимация по умолчанию",
+          "length_m": 20,
+          "inner_m": 0.02,
+          "density_kg_m3": 1000,
+          "velocity_m_s": 0.5
+        },
+        "expected": 3750
+      },
+      "required": [
+        "darcy_lambda",
+        "lambda_source",
+        "length_m",
+        "inner_m",
+        "density_kg_m3",
+        "velocity_m_s"
+      ],
+      "result_status": "calculated_under_stated_conditions_not_full_path_validation"
+    },
+    {
+      "id": "hydraulics.local_zeta_loss",
+      "source_id": "g05.loss",
+      "formula": "pressure_pa = zeta_sum * density_kg_m3 * velocity_m_s^2 / 2",
+      "inputs": {
+        "zeta_sum": {
+          "type": "number",
+          "unit": "dimensionless",
+          "minimum": 0
+        },
+        "coefficient_source": {
+          "type": "string"
+        },
+        "reference_section": {
+          "type": "string"
+        },
+        "density_kg_m3": {
+          "type": "number",
+          "unit": "kg/m3",
+          "exclusive_minimum": 0
+        },
+        "velocity_m_s": {
+          "type": "number",
+          "unit": "m/s",
+          "minimum": 0
+        }
+      },
+      "output": {
+        "unit": "Pa",
+        "number_status": "calculation_relationship"
+      },
+      "applicability": [
+        "Все коэффициенты относятся к указанному сечению и применимому режиму; скорость должна соответствовать этому сечению.",
+        "Сопротивление той же детали не учитывают одновременно по Kv, ζ и эквивалентной длине."
+      ],
+      "missing_data_action": "clarify_coefficients_and_reference_section",
+      "development_example": {
+        "origin": "synthetic_not_product_data",
+        "inputs": {
+          "zeta_sum": 5,
+          "coefficient_source": "Учебные коэффициенты",
+          "reference_section": "Одно заданное сечение",
+          "density_kg_m3": 1000,
+          "velocity_m_s": 0.5
+        },
+        "expected": 625
+      },
+      "required": [
+        "zeta_sum",
+        "coefficient_source",
+        "reference_section",
+        "density_kg_m3",
+        "velocity_m_s"
+      ],
+      "result_status": "calculated_under_stated_conditions_not_full_path_validation"
+    },
+    {
+      "id": "hydraulics.required_water_kv",
+      "source_id": "g05.balance",
+      "formula": "kv_m3_h = flow_m3_h / sqrt(pressure_bar)",
+      "inputs": {
+        "flow_m3_h": {
+          "type": "number",
+          "unit": "m3/h",
+          "exclusive_minimum": 0
+        },
+        "pressure_bar": {
+          "type": "number",
+          "unit": "bar",
+          "exclusive_minimum": 0
+        },
+        "coolant": {
+          "type": "enum",
+          "values": [
+            "water"
+          ]
+        }
+      },
+      "output": {
+        "unit": "m3/h",
+        "number_status": "calculation_relationship"
+      },
+      "applicability": [
+        "Вода и явно выделенный перепад на клапане; не назначать учебные 10 кПа всем изделиям.",
+        "Результат — требуемый Kv. Реальную преднастройку выбирают по таблице изделия и проверяют шум и допустимый перепад."
+      ],
+      "missing_data_action": "clarify_allocated_pressure_and_coolant",
+      "development_example": {
+        "origin": "synthetic_not_product_data",
+        "inputs": {
+          "flow_m3_h": 0.086,
+          "pressure_bar": 0.1,
+          "coolant": "water"
+        },
+        "expected": 0.2719558787744806
+      },
+      "required": [
+        "flow_m3_h",
+        "pressure_bar",
+        "coolant"
+      ],
+      "result_status": "calculated_under_stated_conditions_not_full_path_validation"
+    }
+  ],
+  "common_validation": {
+    "numbers": "finite_numbers_only_in_declared_units",
+    "unknown_fields": "reject",
+    "missing": "clarify_without_defaults"
+  }
+}

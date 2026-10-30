@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "origin": "explicit_synthetic_development_cases",
+  "independent_test_set": false,
+  "professional_reviewed": false,
+  "notes": "Учебные структурированные случаи, включая явные состояния SYN-128 и SYN-131. Без состояния расход 100 л/ч не восстанавливается из текста или соседнего примера.",
+  "cases": [
+    {"id": "inner-12-flow-100", "reference_id": "SYN-063", "input": {"method": "absolute", "flow_l_h": 100, "pipe_inner_mm": 12}, "expected": {"status": "ready", "values": {"pipe_inner_mm": 12, "velocity_m_s": 0.24560948008008543}}},
+    {"id": "corrected-size-with-state", "reference_id": "SYN-128", "dialog_state": "after", "input": {"method": "absolute", "flow_l_h": 100, "pipe_outer_mm": 20, "pipe_wall_mm": 2}, "expected": {"status": "ready", "values": {"pipe_inner_mm": 16, "velocity_m_s": 0.13815533254504805}}},
+    {"id": "corrected-size-without-state", "reference_id": "SYN-128", "dialog_state": "absent", "input": {"method": "absolute", "pipe_outer_mm": 20, "pipe_wall_mm": 2}, "expected": {"status": "clarify", "issues": ["flow_l_h"]}},
+    {"id": "dimensions-with-state", "reference_id": "SYN-131", "dialog_state": "after", "input": {"method": "absolute", "flow_l_h": 100, "pipe_outer_mm": 16, "pipe_wall_mm": 2}, "expected": {"status": "ready", "values": {"velocity_m_s": 0.24560948008008543}}},
+    {"id": "dimensions-without-state", "reference_id": "SYN-131", "dialog_state": "absent", "input": {"method": "absolute", "pipe_outer_mm": 16, "pipe_wall_mm": 2}, "expected": {"status": "clarify", "issues": ["flow_l_h"]}},
+    {"id": "diameter-change-ratio", "input": {"method": "diameter_ratio", "previous_inner_mm": 12, "pipe_inner_mm": 16, "unchanged_volume_flow": true}, "expected": {"status": "ready", "values": {"pipe_inner_mm": 16, "velocity_ratio": 0.5625}}},
+    {"id": "ratio-unconfirmed", "input": {"method": "diameter_ratio", "previous_inner_mm": 12, "pipe_inner_mm": 16, "unchanged_volume_flow": false}, "expected": {"status": "clarify", "issues": ["unchanged_volume_flow"]}},
+    {"id": "ratio-no-assumption", "input": {"method": "diameter_ratio", "previous_inner_mm": 12, "pipe_inner_mm": 16}, "expected": {"status": "clarify", "issues": ["unchanged_volume_flow"]}},
+    {"id": "outer-without-wall", "input": {"method": "absolute", "flow_l_h": 100, "pipe_outer_mm": 16}, "expected": {"status": "clarify", "issues": ["pipe_dimensions"]}},
+    {"id": "conflicting-bore", "input": {"method": "absolute", "flow_l_h": 100, "pipe_inner_mm": 14, "pipe_outer_mm": 16, "pipe_wall_mm": 2}, "expected": {"status": "clarify", "issues": ["geometry_conflict"]}},
+    {"id": "matching-bore", "input": {"method": "absolute", "flow_l_h": 100, "pipe_inner_mm": 12, "pipe_outer_mm": 16, "pipe_wall_mm": 2}, "expected": {"status": "ready", "values": {"velocity_m_s": 0.24560948008008543}}},
+    {"id": "partial-pair-with-bore", "input": {"method": "absolute", "flow_l_h": 100, "pipe_inner_mm": 12, "pipe_wall_mm": 2}, "expected": {"status": "clarify", "issues": ["pipe_dimensions"]}},
+    {"id": "zero-flow", "input": {"method": "absolute", "flow_l_h": 0, "pipe_inner_mm": 12}, "expected": {"status": "ready", "values": {"velocity_m_s": 0}}},
+    {"id": "slow-is-not-prohibited", "input": {"method": "absolute", "flow_l_h": 1, "pipe_inner_mm": 12}, "expected": {"status": "ready", "values": {"velocity_m_s": 0.002456094800800854}}},
+    {"id": "fast-is-not-prohibited", "input": {"method": "absolute", "flow_l_h": 1000, "pipe_inner_mm": 12}, "expected": {"status": "ready", "values": {"velocity_m_s": 2.4560948008008543}}},
+    {"id": "negative-flow", "input": {"method": "absolute", "flow_l_h": -100, "pipe_inner_mm": 12}, "expected": {"status": "invalid", "issues": ["flow_l_h"]}},
+    {"id": "zero-bore", "input": {"method": "absolute", "flow_l_h": 100, "pipe_inner_mm": 0}, "expected": {"status": "invalid", "issues": ["pipe_inner_mm"]}},
+    {"id": "mass-is-not-volume", "input": {"method": "absolute", "mass_kg_h": 100, "pipe_inner_mm": 12}, "expected": {"status": "invalid", "issues": ["mass_kg_h"]}}
+  ]
+}

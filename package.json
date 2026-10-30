@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview --host 127.0.0.1"
+    "preview": "vite preview --host 127.0.0.1",
+    "data:prepare": "node scripts/check-reference-answers.mjs && node scripts/prepare-knowledge.mjs",
+    "data:check": "node scripts/check-reference-answers.mjs && node --test scripts/check-knowledge-data.test.mjs scripts/check-pressure-data.test.mjs scripts/check-stage3-data.test.mjs",
+    "data:check-generated": "node scripts/prepare-knowledge.mjs --check"
   },
   "devDependencies": {
     "typescript": "~5.9.3",

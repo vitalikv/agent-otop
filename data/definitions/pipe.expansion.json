@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "pipe.expansion",
+  "status": "source_aligned_draft_not_professionally_reviewed",
+  "source_ids": ["g06.expand"],
+  "scope": "Свободное линейное температурное перемещение круглой трубы при заданном коэффициенте. Не расчёт напряжений, опор, компенсатора или расширительного бака.",
+  "explanation": "Изменение длины зависит от материала трубы, её длины и изменения температуры. Коэффициент берут для конкретной серии; по одному названию материала его не назначают. При охлаждении перемещение отрицательное.",
+  "parameters": {
+    "method": {"type": "enum", "values": ["linear_expansion", "coefficient_multiplier"], "description": "Численное перемещение либо только множитель при неизвестном коэффициенте."},
+    "length_m": {"type": "number", "unit": "m", "minimum": 0, "accepted_units": {"m": 1, "mm": 0.001}, "description": "Длина рассматриваемого участка."},
+    "temperature_change_k": {"type": "number", "unit": "K", "accepted_units": {"K": 1, "degC_difference": 1}, "description": "Температура трубы в конце минус температура в начале; знак сохраняется. Не перепад подачи и обратки."},
+    "initial_c": {"type": "number", "unit": "degC", "description": "Исходная температура трубы."},
+    "final_c": {"type": "number", "unit": "degC", "description": "Конечная температура трубы."},
+    "alpha_mm_m_k": {"type": "number", "unit": "mm/(m*K)", "minimum": 0, "accepted_units": {"mm/(m*K)": 1, "1/K": 1000}, "description": "Заданный неотрицательный коэффициент линейного расширения в применимой области температур."},
+    "alpha_source": {"type": "string", "description": "Серия, документ и условия коэффициента либо явно учебное допущение; таблицы свойств по материалу не встроены."}
+  },
+  "common_validation": {"numbers": "Только конечные числа в единицах контракта.", "missing": "Отсутствующие значения и null требуют уточнения; значений по умолчанию нет.", "unknown_fields": "reject", "temperature_alternatives": [["temperature_change_k"], ["initial_c", "final_c"]], "delta_consistency_absolute_tolerance_k": 0.000001},
+  "methods": {
+    "linear_expansion": {"required": ["length_m", "alpha_mm_m_k", "alpha_source"], "requires_values": {}, "forbidden_parameters": [], "formula": "expansion_mm = alpha_mm_m_k * length_m * temperature_change_k", "outputs": {"expansion_mm": "mm"}, "result_status": "free_linear_displacement_under_stated_conditions", "assumptions": ["Коэффициент относится к выбранной трубе и диапазону температур.", "Неподвижные и скользящие опоры, проходки, изгибы и напряжения проверяются отдельно по инструкции системы."]},
+    "coefficient_multiplier": {"required": ["length_m"], "requires_values": {}, "forbidden_parameters": ["alpha_mm_m_k", "alpha_source"], "formula": "expansion_coefficient_multiplier = length_m * temperature_change_k", "outputs": {"expansion_coefficient_multiplier": "m*K"}, "result_status": "symbolic_multiplier_not_numerical_expansion", "assumptions": ["Результат — множитель перед коэффициентом в мм/(м·К). Без коэффициента численное перемещение в мм неизвестно."]}
+  },
+  "clarifications": {"alpha_mm_m_k": "Каков коэффициент линейного расширения, его единицы и источник для этой трубы?", "temperature": "Как изменяется температура самой трубы между исходным и рабочим состоянием?", "temperature_conflict": "Проверьте исходную, конечную температуру и их разность.", "length_m": "Какова длина рассматриваемого участка?"},
+  "terms": [{"canonical": "temperature_change_k", "aliases": ["нагрев трубы", "изменение температуры трубы"], "note": "Не смешивать с охлаждением воды между подачей и обраткой."}],
+  "reference_answer_ids": ["SYN-088"]
+}

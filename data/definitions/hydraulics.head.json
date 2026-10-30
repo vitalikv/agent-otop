@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "id": "hydraulics.head",
+  "status": "source_aligned_draft_not_professionally_reviewed",
+  "source_ids": ["g05.flow", "g05.pump"],
+  "scope": "Перевод заданного перепада давления в метры напора при указанной плотности. Не подбор насоса и не перевод статического давления в высоту этажа.",
+  "explanation": "Метры напора выражают перепад давления с учётом плотности жидкости. В замкнутой заполненной системе высоту второго этажа не прибавляют к циркуляционному напору; насос проверяют по потерям наиболее требовательного полного пути и его характеристике.",
+  "parameters": {
+    "method": {"type": "enum", "values": ["water_approximation", "fluid_density"], "description": "Явно выбранное водяное приближение либо расчёт по заданной плотности при рабочих условиях."},
+    "pressure_pa": {"type": "number", "unit": "Pa", "minimum": 0, "accepted_units": {"Pa": 1, "kPa": 1000, "bar": 100000}, "description": "Неотрицательный перепад давления; давление заполнения и высота здания не подставляются как потери циркуляционного пути."},
+    "coolant": {"type": "enum", "values": ["water", "glycol", "other"], "description": "Среда задаётся явно. Неизвестный теплоноситель не считается водой."},
+    "density_kg_m3": {"type": "number", "unit": "kg/m3", "exclusive_minimum": 0, "description": "Плотность выбранной среды при рабочей температуре и составе."},
+    "properties_source": {"type": "string", "description": "Документ или таблица плотности с редакцией и разделом; учебные значения помечаются отдельно."},
+    "properties_temperature_c": {"type": "number", "unit": "degC", "description": "Рабочая температура, к которой относится заданная плотность; автоматически не выбирается."},
+    "properties_composition": {"type": "string", "description": "Для воды — вода; для смеси — состав, концентрация и её массовая или объёмная база."}
+  },
+  "common_validation": {
+    "numbers": "Только конечные числа в единицах контракта; строковое приведение и бесконечности недопустимы.",
+    "missing": "Отсутствующее значение или null требует уточнения, если параметр обязателен. Значений по умолчанию нет.",
+    "unknown_fields": "reject"
+  },
+  "methods": {
+    "water_approximation": {
+      "required": ["pressure_pa", "coolant"],
+      "requires_values": {"coolant": "water"},
+      "forbidden_parameters": ["density_kg_m3", "properties_source", "properties_temperature_c", "properties_composition"],
+      "formula": "head_m = pressure_pa / (1000 * 9.81)",
+      "constants": {"density_kg_m3": {"value": 1000, "unit": "kg/m3", "number_status": "water_density_approximation"}, "gravity_m_s2": {"value": 9.81, "unit": "m/s2", "number_status": "approximate_gravity"}},
+      "outputs": {"head_m": "m"},
+      "result_status": "preliminary_water_head_estimate",
+      "assumptions": ["Вода; явно принято приближение плотности 1000 кг/м³ и g = 9,81 м/с².", "При другой плотности нужен расчёт по её значению в рабочих условиях. Это метры напора выбранной среды, не постоянный коэффициент для всех жидкостей."]
+    },
+    "fluid_density": {
+      "required": ["pressure_pa", "coolant", "density_kg_m3", "properties_source", "properties_temperature_c", "properties_composition"],
+      "requires_values": {},
+      "forbidden_parameters": [],
+      "formula": "head_m = pressure_pa / (density_kg_m3 * 9.81)",
+      "constants": {"gravity_m_s2": {"value": 9.81, "unit": "m/s2", "number_status": "approximate_gravity"}},
+      "outputs": {"head_m": "m"},
+      "result_status": "head_under_stated_density",
+      "assumptions": ["Плотность относится к указанному составу и рабочей температуре; происхождение и применимость свойств проверяются отдельно.", "Используется g = 9,81 м/с². Встроенных таблиц свойств или паспортов нет.", "Теплоёмкость для этого преобразования не нужна."]
+    }
+  },
+  "clarifications": {
+    "pressure_pa": "Какой перепад давления нужно перевести и в каких единицах он указан?",
+    "coolant": "Какой теплоноситель и рабочая температура? Можно отдельно рассмотреть явно условный водяной пример.",
+    "density_kg_m3": "Укажите плотность теплоносителя при рабочей температуре с источником и составом."
+  },
+  "dialog_policy": ["При неизвестной среде не выдавать водяной пример за окончательный результат.", "Не прибавлять высоту этажей к циркуляционному напору в замкнутой заполненной системе.", "Для подбора насоса требуются расход, наиболее требовательный полный путь с общими участками, характеристика насоса и ограничения оборудования.", "Не складывать потери всех параллельных веток; внутренние потери встроенного насоса котла не учитывать дважды."],
+  "terms": [
+    {"canonical": "head_m", "aliases": ["напор", "метры напора"], "note": "Не высота этажа и не подтверждение рабочей точки насоса."},
+    {"canonical": "pressure_pa", "aliases": ["перепад давления", "потери давления"], "note": "Статическое давление заполнения имеет другую задачу."}
+  ],
+  "reference_answer_ids": ["SYN-068"]
+}

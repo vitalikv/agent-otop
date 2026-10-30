@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "id": "hydraulics.velocity",
+  "status": "source_aligned_draft_not_professionally_reviewed",
+  "source_ids": ["g05.size", "g05.speed"],
+  "scope": "Средняя скорость в круглом проходном сечении при заданном объёмном расходе. Не проверка шума, потерь давления или достаточности контура.",
+  "explanation": "Скорость равна объёмному расходу, делённому на площадь прохода. Нужен внутренний диаметр: наружного размера трубы без стенки недостаточно. При том же расходе увеличение внутреннего диаметра уменьшает скорость пропорционально квадрату диаметра.",
+  "parameters": {
+    "method": {"type": "enum", "values": ["absolute", "diameter_ratio"], "description": "Абсолютная скорость или отношение скоростей при неизменном объёмном расходе."},
+    "flow_l_h": {"type": "number", "unit": "l/h", "minimum": 0, "accepted_units": {"l/h": 1, "m3/h": 1000, "l/min": 60, "m3/s": 3600000}, "description": "Объёмный расход; кг/ч нельзя подставлять без преобразования с известной плотностью."},
+    "pipe_inner_mm": {"type": "number", "unit": "mm", "exclusive_minimum": 0, "accepted_units": {"mm": 1, "m": 1000}, "description": "Внутренний диаметр круглого сечения; не наружный размер и не DN."},
+    "pipe_outer_mm": {"type": "number", "unit": "mm", "exclusive_minimum": 0, "accepted_units": {"mm": 1, "m": 1000}, "description": "Наружный диаметр, если проход вычисляют по геометрии трубы."},
+    "pipe_wall_mm": {"type": "number", "unit": "mm", "exclusive_minimum": 0, "accepted_units": {"mm": 1, "m": 1000}, "description": "Толщина одной стенки для указанного наружного диаметра."},
+    "previous_inner_mm": {"type": "number", "unit": "mm", "exclusive_minimum": 0, "description": "Предыдущий внутренний диаметр для отношения скоростей."},
+    "unchanged_volume_flow": {"type": "boolean", "description": "Явно подтверждён неизменный положительный объёмный расход; неизменного массового расхода при изменении плотности недостаточно."}
+  },
+  "common_validation": {
+    "numbers": "Только конечные числа в единицах контракта; строки и массовый расход не подставляются автоматически.",
+    "missing": "Отсутствующие значения и null требуют уточнения. Значений по умолчанию нет.",
+    "geometry_alternatives": [["pipe_inner_mm"], ["pipe_outer_mm", "pipe_wall_mm"]],
+    "geometry_relation": "pipe_outer_mm > 2 * pipe_wall_mm; pipe_inner_mm = pipe_outer_mm - 2 * pipe_wall_mm, если заданы оба представления",
+    "geometry_consistency_absolute_tolerance_mm": 0.000001,
+    "geometry_conflict_action": "clarify_without_guessing_dimensions",
+    "unknown_fields": "reject"
+  },
+  "methods": {
+    "absolute": {
+      "required": ["flow_l_h"],
+      "uses_geometry_alternatives": true,
+      "requires_values": {},
+      "forbidden_parameters": ["previous_inner_mm", "unchanged_volume_flow"],
+      "formula": "velocity_m_s = 4 * (flow_l_h / 1000 / 3600) / (PI * (pipe_inner_mm / 1000)^2)",
+      "outputs": {"pipe_inner_mm": "mm", "velocity_m_s": "m/s"},
+      "result_status": "calculated_velocity_under_stated_conditions",
+      "assumptions": ["Круглое проходное сечение; плотность не нужна, поскольку расход уже объёмный.", "При нулевом расходе скорость равна нулю; работоспособность, удаление воздуха и обязательный расход источника этим не подтверждены.", "Скорость в трубе не подтверждает отсутствие шума клапана или достаточный напор."]
+    },
+    "diameter_ratio": {
+      "required": ["previous_inner_mm", "unchanged_volume_flow"],
+      "uses_geometry_alternatives": true,
+      "requires_values": {"unchanged_volume_flow": true},
+      "forbidden_parameters": ["flow_l_h"],
+      "formula": "velocity_ratio = (previous_inner_mm / pipe_inner_mm)^2",
+      "outputs": {"pipe_inner_mm": "mm", "velocity_ratio": "dimensionless"},
+      "result_status": "ratio_under_unchanged_volume_flow",
+      "assumptions": ["Объёмный расход неизменен и положителен; при нулевом потоке отношение скоростей 0/0 не определено.", "Результат — отношение новой скорости к прежней, а не абсолютная скорость без известного расхода."]
+    }
+  },
+  "speed_guidance": {"minimum": 0.2, "maximum": 0.7, "unit": "m/s", "number_status": "project_guideline", "enforcement": "not_a_validation_bound_or_default", "note": "Ориентир начала подбора в тихой насосной системе дома, не универсальная норма и не гарантия отсутствия шума. Меньшую скорость в короткой подводке проверяют с учётом удаления воздуха и регулирования."},
+  "clarifications": {
+    "flow_l_h": "Какой объёмный расход принят и в каких единицах?",
+    "pipe_dimensions": "Укажите внутренний диаметр либо полный наружный размер и стенку в мм.",
+    "geometry_conflict": "Проверьте внутренний диаметр, наружный размер и стенку: заданные значения не согласуются.",
+    "unchanged_volume_flow": "Сохраняется ли положительный объёмный расход при изменении диаметра?"
+  },
+  "dialog_policy": ["Исправленный размер заменяет прежний; проход и скорость пересчитываются по сохранённому расходу.", "Без переданного состояния не подставлять 100 л/ч из учебного примера.", "Частичная пара наружного размера и стенки требует уточнения даже при заданном внутреннем диаметре."],
+  "terms": [
+    {"canonical": "flow_l_h", "aliases": ["объёмный расход", "литров в час"], "note": "Отличать от массового расхода."},
+    {"canonical": "pipe_inner_mm", "aliases": ["проход трубы", "внутренний диаметр"], "note": "Наружный размер, DN и проход фитинга не подменяют эту величину."}
+  ],
+  "reference_answer_ids": ["SYN-063", "SYN-128", "SYN-131"]
+}

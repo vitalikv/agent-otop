@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "origin": "explicit_synthetic_development_cases",
+  "independent_test_set": false,
+  "professional_reviewed": false,
+  "notes": "Учебные входы для одного клапана на воде. Исходный SYN-066 требует уточнения; его условный численный пример проверяется отдельно с точными допущениями эталона. Значения Kv не являются паспортом изделия.",
+  "cases": [
+    {"id": "kv-first-response", "reference_id": "SYN-066", "input": {"method": "valve_kv_water", "flow_m3_h": 0.2, "kv_m3_h": 0.5}, "expected": {"status": "clarify", "issues": ["coolant", "kv_basis", "kv_source"]}},
+    {"id": "kv-conditional-example", "reference_id": "SYN-066", "reference_view": "conditional_example", "reference_assumptions": ["Условно вода; Kv относится к рабочей настройке. Для другой плотности/настройки ответ не окончательный."], "input": {"method": "valve_kv_water", "flow_m3_h": 0.2, "kv_m3_h": 0.5, "coolant": "water", "kv_basis": "operating_setting", "kv_source": "Учебное допущение SYN-066; не паспорт изделия"}, "expected": {"status": "ready", "values": {"pressure_bar": 0.16, "pressure_kpa": 16, "pressure_pa": 16000}}},
+    {"id": "half-flow-quarter-loss", "input": {"method": "valve_kv_water", "flow_m3_h": 0.1, "kv_m3_h": 0.5, "coolant": "water", "kv_basis": "operating_setting", "kv_source": "Учебный коэффициент"}, "expected": {"status": "ready", "values": {"pressure_kpa": 4}}},
+    {"id": "double-flow-fourfold-loss", "input": {"method": "valve_kv_water", "flow_m3_h": 0.4, "kv_m3_h": 0.5, "coolant": "water", "kv_basis": "operating_setting", "kv_source": "Учебный коэффициент"}, "expected": {"status": "ready", "values": {"pressure_kpa": 64}}},
+    {"id": "zero-flow", "input": {"method": "valve_kv_water", "flow_m3_h": 0, "kv_m3_h": 0.5, "coolant": "water", "kv_basis": "operating_setting", "kv_source": "Учебный коэффициент"}, "expected": {"status": "ready", "values": {"pressure_pa": 0}}},
+    {"id": "zero-kv", "input": {"method": "valve_kv_water", "flow_m3_h": 0.2, "kv_m3_h": 0, "coolant": "water", "kv_basis": "operating_setting", "kv_source": "Учебный коэффициент"}, "expected": {"status": "invalid", "issues": ["kv_m3_h"]}},
+    {"id": "negative-kv", "input": {"method": "valve_kv_water", "flow_m3_h": 0.2, "kv_m3_h": -0.5, "coolant": "water", "kv_basis": "operating_setting", "kv_source": "Учебный коэффициент"}, "expected": {"status": "invalid", "issues": ["kv_m3_h"]}},
+    {"id": "negative-flow", "input": {"method": "valve_kv_water", "flow_m3_h": -0.2, "kv_m3_h": 0.5, "coolant": "water", "kv_basis": "operating_setting", "kv_source": "Учебный коэффициент"}, "expected": {"status": "invalid", "issues": ["flow_m3_h"]}},
+    {"id": "missing-flow", "input": {"method": "valve_kv_water", "kv_m3_h": 0.5, "coolant": "water", "kv_basis": "operating_setting", "kv_source": "Учебный коэффициент"}, "expected": {"status": "clarify", "issues": ["flow_m3_h"]}},
+    {"id": "glycol-needs-other-method", "input": {"method": "valve_kv_water", "flow_m3_h": 0.2, "kv_m3_h": 0.5, "coolant": "glycol", "kv_basis": "operating_setting", "kv_source": "Учебный коэффициент"}, "expected": {"status": "clarify", "issues": ["coolant"]}},
+    {"id": "other-fluid-needs-method", "input": {"method": "valve_kv_water", "flow_m3_h": 0.2, "kv_m3_h": 0.5, "coolant": "other", "kv_basis": "operating_setting", "kv_source": "Учебный коэффициент"}, "expected": {"status": "clarify", "issues": ["coolant"]}},
+    {"id": "kvs-is-not-operating-kv", "input": {"method": "valve_kv_water", "flow_m3_h": 0.2, "kv_m3_h": 0.5, "coolant": "water", "kv_basis": "fully_open_kvs", "kv_source": "Учебное Kvs"}, "expected": {"status": "clarify", "issues": ["kv_basis"]}},
+    {"id": "null-kv", "input": {"method": "valve_kv_water", "flow_m3_h": 0.2, "kv_m3_h": null, "coolant": "water", "kv_basis": "operating_setting", "kv_source": "Учебный коэффициент"}, "expected": {"status": "clarify", "issues": ["kv_m3_h"]}},
+    {"id": "source-required", "input": {"method": "valve_kv_water", "flow_m3_h": 0.2, "kv_m3_h": 0.5, "coolant": "water", "kv_basis": "operating_setting"}, "expected": {"status": "clarify", "issues": ["kv_source"]}},
+    {"id": "blank-source", "input": {"method": "valve_kv_water", "flow_m3_h": 0.2, "kv_m3_h": 0.5, "coolant": "water", "kv_basis": "operating_setting", "kv_source": " "}, "expected": {"status": "invalid", "issues": ["kv_source"]}},
+    {"id": "no-zeta-double-accounting", "input": {"method": "valve_kv_water", "flow_m3_h": 0.2, "kv_m3_h": 0.5, "coolant": "water", "kv_basis": "operating_setting", "kv_source": "Учебный коэффициент", "zeta": 2}, "expected": {"status": "invalid", "issues": ["zeta"]}}
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "hydraulics.diameter",
+  "status": "source_aligned_draft_not_professionally_reviewed",
+  "source_ids": ["g05.speed"],
+  "scope": "Предварительный внутренний диаметр круглого сечения по объёмному расходу и явно выбранной скорости. Не наружный типоразмер и не окончательный подбор трубы.",
+  "explanation": "По расходу и выбранной скорости можно найти требуемый внутренний проход. Затем выбирают реальную серию трубы со стенкой и проверяют сопротивление полного пути, арматуру и доступный перепад.",
+  "parameters": {
+    "method": {"type": "enum", "values": ["by_velocity"], "description": "Обратная зависимость формулы скорости в круглом сечении."},
+    "flow_l_h": {"type": "number", "unit": "l/h", "exclusive_minimum": 0, "accepted_units": {"l/h": 1, "m3/h": 1000, "l/min": 60, "m3/s": 3600000}, "description": "Положительный объёмный расход. При нулевом расходе выбрать пригодный диаметр по этой формуле нельзя."},
+    "velocity_m_s": {"type": "number", "unit": "m/s", "exclusive_minimum": 0, "accepted_units": {"m/s": 1}, "description": "Явно выбранная положительная скорость. 0,5 м/с не подставляется по умолчанию."}
+  },
+  "common_validation": {
+    "numbers": "Только конечные числа в единицах контракта.",
+    "missing": "Отсутствующие значения и null требуют уточнения. Скорость не выбирается молча.",
+    "unknown_fields": "reject"
+  },
+  "methods": {
+    "by_velocity": {
+      "required": ["flow_l_h", "velocity_m_s"],
+      "uses_geometry_alternatives": false,
+      "requires_values": {},
+      "forbidden_parameters": [],
+      "formula": "pipe_inner_mm = sqrt(4 * (flow_l_h / 1000 / 3600) / (PI * velocity_m_s)) * 1000",
+      "outputs": {"pipe_inner_mm": "mm"},
+      "result_status": "preliminary_internal_diameter_by_velocity",
+      "assumptions": ["Круглое проходное сечение и явно выбранная скорость; плотность не нужна для заданного объёмного расхода.", "Расчёт не даёт наружный типоразмер. Стенка, серия, сужения фитингов и потери полного пути проверяются отдельно.", "Таблица переносимой мощности в источнике не является предельной мощностью трубы."]
+    }
+  },
+  "speed_guidance": {"minimum": 0.2, "maximum": 0.7, "unit": "m/s", "number_status": "project_guideline", "enforcement": "not_a_validation_bound_or_default", "note": "Проектный ориентир начала подбора; значения вне диапазона требуют инженерной оценки, а не автоматического запрета этой формулы."},
+  "clarifications": {
+    "flow_l_h": "Какой объёмный расход принят?",
+    "velocity_m_s": "Какую скорость принять для предварительного расчёта?"
+  },
+  "terms": [
+    {"canonical": "pipe_inner_mm", "aliases": ["расчётный внутренний диаметр", "требуемый проход"], "note": "Не наружный типоразмер и не DN."},
+    {"canonical": "velocity_m_s", "aliases": ["выбранная скорость", "скорость потока"], "note": "Ориентир не превращается в универсальный норматив или значение по умолчанию."}
+  ],
+  "reference_answer_ids": ["SYN-064"]
+}

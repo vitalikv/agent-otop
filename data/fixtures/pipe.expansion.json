@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "origin": "explicit_synthetic_development_cases",
+  "independent_test_set": false,
+  "professional_reviewed": false,
+  "notes": "Коэффициент 0,15 мм/(м·К) — вымышленный учебный вход, не характеристика марки трубы. Символьный множитель из SYN-088 не является численным удлинением.",
+  "cases": [
+    {"id": "missing-alpha", "reference_id": "SYN-088", "input": {"method": "linear_expansion", "length_m": 10, "temperature_change_k": 50}, "expected": {"status": "clarify", "issues": ["alpha_mm_m_k", "alpha_source"]}},
+    {"id": "symbolic-reference", "reference_id": "SYN-088", "reference_view": "conditional_example", "reference_assumptions": ["ΔL = 500*α мм, когда α задан в мм/(м*К); это не численное удлинение без α."], "input": {"method": "coefficient_multiplier", "length_m": 10, "temperature_change_k": 50}, "expected": {"status": "ready", "values": {"expansion_coefficient_multiplier": 500}}},
+    {"id": "synthetic-expansion", "input": {"method": "linear_expansion", "length_m": 10, "temperature_change_k": 50, "alpha_mm_m_k": 0.15, "alpha_source": "Учебное значение, не паспорт"}, "expected": {"status": "ready", "values": {"expansion_mm": 75}}},
+    {"id": "contraction", "input": {"method": "linear_expansion", "length_m": 10, "temperature_change_k": -50, "alpha_mm_m_k": 0.15, "alpha_source": "Учебное значение"}, "expected": {"status": "ready", "values": {"expansion_mm": -75}}},
+    {"id": "temperature-pair", "input": {"method": "linear_expansion", "length_m": 10, "initial_c": 20, "final_c": 70, "alpha_mm_m_k": 0.15, "alpha_source": "Учебное значение"}, "expected": {"status": "ready", "values": {"expansion_mm": 75}}},
+    {"id": "zero-change", "input": {"method": "linear_expansion", "length_m": 10, "temperature_change_k": 0, "alpha_mm_m_k": 0.15, "alpha_source": "Учебное значение"}, "expected": {"status": "ready", "values": {"expansion_mm": 0}}},
+    {"id": "zero-alpha", "input": {"method": "linear_expansion", "length_m": 10, "temperature_change_k": 50, "alpha_mm_m_k": 0, "alpha_source": "Учебное значение"}, "expected": {"status": "ready", "values": {"expansion_mm": 0}}},
+    {"id": "negative-length", "input": {"method": "coefficient_multiplier", "length_m": -10, "temperature_change_k": 50}, "expected": {"status": "invalid", "issues": ["length_m"]}},
+    {"id": "missing-temperature", "input": {"method": "coefficient_multiplier", "length_m": 10}, "expected": {"status": "clarify", "issues": ["temperature"]}},
+    {"id": "partial-temperature", "input": {"method": "coefficient_multiplier", "length_m": 10, "initial_c": 20, "temperature_change_k": 50}, "expected": {"status": "clarify", "issues": ["temperature"]}},
+    {"id": "temperature-conflict", "input": {"method": "coefficient_multiplier", "length_m": 10, "initial_c": 20, "final_c": 70, "temperature_change_k": 10}, "expected": {"status": "clarify", "issues": ["temperature_conflict"]}},
+    {"id": "negative-alpha", "input": {"method": "linear_expansion", "length_m": 10, "temperature_change_k": 50, "alpha_mm_m_k": -0.15, "alpha_source": "Учебное значение"}, "expected": {"status": "invalid", "issues": ["alpha_mm_m_k"]}}
+  ]
+}

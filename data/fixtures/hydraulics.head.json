@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "origin": "explicit_synthetic_development_cases",
+  "independent_test_set": false,
+  "professional_reviewed": false,
+  "notes": "Структурированные учебные входы. Численный водяной пример SYN-068 отделён от уточнения исходного запроса. Плотность смеси 1030 кг/м³ вымышлена для проверки арифметики и не является свойством продукта.",
+  "cases": [
+    {"id": "head-first-response", "reference_id": "SYN-068", "input": {"method": "water_approximation", "pressure_pa": 15000}, "expected": {"status": "clarify", "issues": ["coolant"]}},
+    {"id": "head-conditional-example", "reference_id": "SYN-068", "reference_view": "conditional_example", "reference_assumptions": ["Условная плотность 1000 кг/м³; при другой среде нужно её значение."], "input": {"method": "water_approximation", "pressure_pa": 15000, "coolant": "water"}, "expected": {"status": "ready", "values": {"head_m": 1.529051987767584}}},
+    {"id": "specified-water-density", "input": {"method": "fluid_density", "pressure_pa": 15000, "coolant": "water", "density_kg_m3": 1000, "properties_source": "Учебное постоянное приближение, не рабочее паспортное свойство", "properties_temperature_c": 40, "properties_composition": "Вода; учебное значение"}, "expected": {"status": "ready", "values": {"head_m": 1.529051987767584}}},
+    {"id": "synthetic-mixture-density", "input": {"method": "fluid_density", "pressure_pa": 15000, "coolant": "glycol", "density_kg_m3": 1030, "properties_source": "Вымышленное значение только для арифметики", "properties_temperature_c": 40, "properties_composition": "Учебная смесь, условные 30 % по массе; не продукт"}, "expected": {"status": "ready", "values": {"head_m": 1.4845164929782368}}},
+    {"id": "zero-pressure-drop", "input": {"method": "water_approximation", "pressure_pa": 0, "coolant": "water"}, "expected": {"status": "ready", "values": {"head_m": 0}}},
+    {"id": "negative-pressure-drop", "input": {"method": "water_approximation", "pressure_pa": -15000, "coolant": "water"}, "expected": {"status": "invalid", "issues": ["pressure_pa"]}},
+    {"id": "zero-density", "input": {"method": "fluid_density", "pressure_pa": 15000, "coolant": "glycol", "density_kg_m3": 0, "properties_source": "Учебный источник", "properties_temperature_c": 40, "properties_composition": "Учебная смесь"}, "expected": {"status": "invalid", "issues": ["density_kg_m3"]}},
+    {"id": "negative-density", "input": {"method": "fluid_density", "pressure_pa": 15000, "coolant": "glycol", "density_kg_m3": -1030, "properties_source": "Учебный источник", "properties_temperature_c": 40, "properties_composition": "Учебная смесь"}, "expected": {"status": "invalid", "issues": ["density_kg_m3"]}},
+    {"id": "density-required", "input": {"method": "fluid_density", "pressure_pa": 15000, "coolant": "glycol", "properties_source": "Учебный источник", "properties_temperature_c": 40, "properties_composition": "Учебная смесь"}, "expected": {"status": "clarify", "issues": ["density_kg_m3"]}},
+    {"id": "all-properties-missing", "input": {"method": "fluid_density", "pressure_pa": 15000, "coolant": "glycol"}, "expected": {"status": "clarify", "issues": ["density_kg_m3", "properties_source", "properties_temperature_c", "properties_composition"]}},
+    {"id": "glycol-is-not-water", "input": {"method": "water_approximation", "pressure_pa": 15000, "coolant": "glycol"}, "expected": {"status": "clarify", "issues": ["coolant"]}},
+    {"id": "no-silent-density-ignore", "input": {"method": "water_approximation", "pressure_pa": 15000, "coolant": "water", "density_kg_m3": 980}, "expected": {"status": "invalid", "issues": ["density_kg_m3"]}},
+    {"id": "no-string-coercion", "input": {"method": "water_approximation", "pressure_pa": "15000", "coolant": "water"}, "expected": {"status": "invalid", "issues": ["pressure_pa"]}},
+    {"id": "blank-properties-source", "input": {"method": "fluid_density", "pressure_pa": 15000, "coolant": "glycol", "density_kg_m3": 1030, "properties_source": " ", "properties_temperature_c": 40, "properties_composition": "Учебная смесь"}, "expected": {"status": "invalid", "issues": ["properties_source"]}},
+    {"id": "no-floor-height-addition", "input": {"method": "water_approximation", "pressure_pa": 15000, "coolant": "water", "floor_height_m": 6}, "expected": {"status": "invalid", "issues": ["floor_height_m"]}},
+    {"id": "pressure-required", "input": {"method": "water_approximation", "coolant": "water"}, "expected": {"status": "clarify", "issues": ["pressure_pa"]}},
+    {"id": "temperature-required", "input": {"method": "fluid_density", "pressure_pa": 15000, "coolant": "glycol", "density_kg_m3": 1030, "properties_source": "Учебный источник", "properties_temperature_c": null, "properties_composition": "Учебная смесь"}, "expected": {"status": "clarify", "issues": ["properties_temperature_c"]}},
+    {"id": "method-required", "input": {"pressure_pa": 15000, "coolant": "water"}, "expected": {"status": "clarify", "issues": ["method"]}}
+  ]
+}

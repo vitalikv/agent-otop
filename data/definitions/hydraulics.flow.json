@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "id": "hydraulics.flow",
+  "status": "source_aligned_draft_not_professionally_reviewed",
+  "source_ids": ["g05.flow"],
+  "scope": "Проектная потребность участка по тепловой нагрузке и охлаждению теплоносителя. Не фактический расход, минимальный расход котла или подбор насоса.",
+  "explanation": "Расход показывает, сколько теплоносителя нужно пропустить через участок, чтобы перенести заданную мощность при выбранном охлаждении. Нужны нагрузка, разность температур подачи и обратки и сведения о теплоносителе.",
+  "parameters": {
+    "method": {"type": "enum", "values": ["water_approximation", "fluid_properties", "delta_ratio"], "description": "Способ расчёта задаётся явно; водяное приближение не выбирается молча."},
+    "load_kw": {"type": "number", "unit": "kW", "minimum": 0, "accepted_units": {"kW": 1, "W": 0.001}, "description": "Переносимая расчётная нагрузка участка, а не увеличенная паспортная мощность радиатора."},
+    "coolant": {"type": "enum", "values": ["water", "glycol", "other"], "description": "Неизвестная среда не считается водой."},
+    "supply_c": {"type": "number", "unit": "degC", "description": "Температура подачи; допустимость режима проверяется по среде и оборудованию отдельно."},
+    "return_c": {"type": "number", "unit": "degC", "description": "Температура обратки; числа не переставляются автоматически."},
+    "water_delta_k": {"type": "number", "unit": "K", "exclusive_minimum": 0, "accepted_units": {"K": 1, "degC_difference": 1}, "description": "Положительное охлаждение теплоносителя. Совместимое с эталонами имя поля не ограничивает его водой; это не температурный напор радиатора относительно воздуха."},
+    "specific_heat_j_kg_k": {"type": "number", "unit": "J/(kg*K)", "exclusive_minimum": 0, "description": "Теплоёмкость заданной среды при рабочей температуре."},
+    "density_kg_m3": {"type": "number", "unit": "kg/m3", "exclusive_minimum": 0, "description": "Плотность той же среды в тех же рабочих условиях."},
+    "properties_source": {"type": "string", "description": "Источник свойств: документ или таблица, редакция и раздел; ссылка при наличии. Числа без происхождения не считаются подтверждёнными."},
+    "properties_temperature_c": {"type": "number", "unit": "degC", "description": "Рабочая температура, к которой относятся свойства; не подставлять среднюю температуру молча."},
+    "properties_composition": {"type": "string", "description": "Для смеси — состав, концентрация и её база (массовая или объёмная); для воды — вода."},
+    "previous_delta_k": {"type": "number", "unit": "K", "exclusive_minimum": 0, "description": "Предыдущее охлаждение для отношения расходов."},
+    "unchanged_load_and_properties": {"type": "boolean", "description": "Явно подтверждены неизменные нагрузка, теплоёмкость и плотность для сравнения объёмных расходов."}
+  },
+  "common_validation": {
+    "numbers": "Только конечные числа; строки, NaN и бесконечности недопустимы. Значения уже приведены к единицам параметров.",
+    "missing": "Отсутствующее значение или null требует уточнения, если параметр обязателен. Значений по умолчанию нет.",
+    "temperature_alternatives": [["water_delta_k"], ["supply_c", "return_c"]],
+    "temperature_relation": "supply_c > return_c; если задан и water_delta_k, он должен совпадать с supply_c - return_c.",
+    "delta_consistency_absolute_tolerance_k": 0.000001,
+    "temperature_conflict_action": "clarify_without_swapping_or_taking_absolute_value",
+    "unknown_fields": "reject",
+    "equipment_limits": "Числовые пределы температуры и нагрузки оборудования не задаются этой формулой. Положительные c, rho и delta не подтверждают применимость свойств или допустимость оборудования."
+  },
+  "methods": {
+    "water_approximation": {
+      "required": ["load_kw", "coolant"],
+      "uses_temperature_alternatives": true,
+      "requires_values": {"coolant": "water"},
+      "forbidden_parameters": ["specific_heat_j_kg_k", "density_kg_m3", "properties_source", "properties_temperature_c", "properties_composition", "previous_delta_k", "unchanged_load_and_properties"],
+      "formula": "volume_m3_h = 0.86 * load_kw / delta_k",
+      "constants": {"water_coefficient": {"value": 0.86, "unit": "m3*K/(h*kW)", "number_status": "rounded_water_approximation"}},
+      "outputs": {"volume_m3_h": "m3/h", "volume_l_h": "l/h"},
+      "result_status": "preliminary_water_estimate",
+      "assumptions": ["Вода; коэффициент 0,86 округлён для c около 4180 Дж/(кг·К) и плотности около 1000 кг/м³.", "Для окончательного расчёта используют свойства при рабочей температуре; коэффициент не переносится на гликоль."]
+    },
+    "fluid_properties": {
+      "required": ["load_kw", "coolant", "specific_heat_j_kg_k", "density_kg_m3", "properties_source", "properties_temperature_c", "properties_composition"],
+      "uses_temperature_alternatives": true,
+      "requires_values": {},
+      "forbidden_parameters": ["previous_delta_k", "unchanged_load_and_properties"],
+      "formula": "mass_kg_s = load_kw * 1000 / (specific_heat_j_kg_k * delta_k); volume_m3_h = 3600 * mass_kg_s / density_kg_m3",
+      "constants": {},
+      "outputs": {"mass_kg_s": "kg/s", "volume_m3_h": "m3/h", "volume_l_h": "l/h"},
+      "result_status": "calculated_under_stated_conditions",
+      "assumptions": ["c и плотность относятся к одному составу и рабочим условиям; происхождение и применимость свойств проверяются отдельно.", "Для гликоля нужны свойства заданного состава, концентрации и температуры; встроенной таблицы свойств нет.", "Расчёт потребности не подтверждает реальный поток, совместимость теплоносителя, диаметр, настройку арматуры или насос."]
+    },
+    "delta_ratio": {
+      "required": ["previous_delta_k", "unchanged_load_and_properties"],
+      "uses_temperature_alternatives": true,
+      "requires_values": {"unchanged_load_and_properties": true},
+      "forbidden_parameters": ["load_kw", "coolant", "specific_heat_j_kg_k", "density_kg_m3", "properties_source", "properties_temperature_c", "properties_composition"],
+      "formula": "volume_ratio = previous_delta_k / delta_k",
+      "constants": {},
+      "outputs": {"volume_ratio": "dimensionless"},
+      "result_status": "ratio_under_unchanged_load_and_properties",
+      "assumptions": ["Нагрузка, теплоёмкость и плотность неизменны. При изменении свойств это отношение не применяется.", "Абсолютный расход без нагрузки и свойств среды не определяется."]
+    }
+  },
+  "clarifications": {
+    "load_kw": "Какую тепловую нагрузку должен переносить участок, в Вт или кВт?",
+    "temperature": "Какие температуры подачи и обратки или какое охлаждение теплоносителя принято?",
+    "temperature_conflict": "Проверьте температуры и перепад: подача должна быть выше обратки, а перепад — равен их разности. Какие значения верны?",
+    "coolant": "Какой теплоноситель: вода или смесь?",
+    "properties": "Укажите теплоёмкость и плотность при рабочей температуре с источником; для смеси также состав и концентрацию.",
+    "unchanged_load_and_properties": "Остаются ли прежними нагрузка и свойства теплоносителя?"
+  },
+  "dialog_policy": [
+    "Сохранять уже известные параметры и уточнять только недостающие или противоречивые.",
+    "При смене режима пересчитывать расход по сохранённой нагрузке и подтверждённым свойствам, не переносить прежнее значение расхода.",
+    "Ответы-продолжения без переданного состояния не восстанавливают мощность или режим из учебного примера.",
+    "Объяснение зависимости не требует сбора всех численных параметров.",
+    "Нулевая нагрузка даёт нулевую проектную потребность при положительном охлаждении, но не разрешает прекращать обязательный расход источника."
+  ],
+  "terms": [
+    {"canonical": "load_kw", "aliases": ["нагрузка участка", "переносимая мощность"], "note": "Не подменять паспортной мощностью радиатора."},
+    {"canonical": "water_delta_k", "aliases": ["охлаждение теплоносителя", "разность температур подачи и обратки"], "note": "Слово перепад без контекста может обозначать давление; ΔT также бывает температурным напором радиатора."},
+    {"canonical": "water", "aliases": ["вода", "обычная вода"], "note": "Сначала учитывать отрицания: фраза не вода не подтверждает воду."},
+    {"canonical": "glycol", "aliases": ["гликоль", "антифриз", "незамерзайка"], "note": "Разговорное название не задаёт состав, концентрацию и свойства; требуется уточнение."}
+  ],
+  "reference_answer_ids": ["SYN-061", "SYN-069", "SYN-070", "SYN-124", "SYN-125", "SYN-133", "SYN-136"]
+}

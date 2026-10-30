@@ -1,0 +1,555 @@
+{
+  "schema_version": 1,
+  "status": "source_aligned_not_professionally_reviewed",
+  "scope": "all_eight_chapters_including_introductions",
+  "sections": [
+    {
+      "id": "g01.intro",
+      "file": "docs/knowledge/installation-guide/01-input-data-and-heat-loss.md",
+      "heading": "1. Исходные данные и теплопотери",
+      "kind": "chapter_intro",
+      "number_statuses": [
+        "context_not_numeric_requirement"
+      ],
+      "note": "Введение и границы главы сохраняются перед разделами; номер главы не является техническим значением."
+    },
+    {
+      "id": "g01.inputs",
+      "file": "docs/knowledge/installation-guide/01-input-data-and-heat-loss.md",
+      "heading": "Что собрать до выбора оборудования",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "educational_example"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g01.heat",
+      "file": "docs/knowledge/installation-guide/01-input-data-and-heat-loss.md",
+      "heading": "Трансмиссионные потери",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "calculation_relationship"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g01.air",
+      "file": "docs/knowledge/installation-guide/01-input-data-and-heat-loss.md",
+      "heading": "Нагрев наружного воздуха",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "calculation_relationship",
+        "approximation",
+        "educational_example"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g01.load",
+      "file": "docs/knowledge/installation-guide/01-input-data-and-heat-loss.md",
+      "heading": "От нагрузки комнаты к нагрузке дома",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "calculation_relationship",
+        "example_not_universal_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g01.missing",
+      "file": "docs/knowledge/installation-guide/01-input-data-and-heat-loss.md",
+      "heading": "Что делать при нехватке данных",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "project_guideline"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g02.intro",
+      "file": "docs/knowledge/installation-guide/02-system-layouts.md",
+      "heading": "2. Выбор схемы системы",
+      "kind": "chapter_intro",
+      "number_statuses": [
+        "context_not_numeric_requirement"
+      ],
+      "note": "Введение и границы главы сохраняются перед разделами; номер главы не является техническим значением."
+    },
+    {
+      "id": "g02.compare",
+      "file": "docs/knowledge/installation-guide/02-system-layouts.md",
+      "heading": "Сравнение",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "applicability_condition"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g02.dead",
+      "file": "docs/knowledge/installation-guide/02-system-layouts.md",
+      "heading": "Двухтрубная тупиковая",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "applicability_condition"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g02.return",
+      "file": "docs/knowledge/installation-guide/02-system-layouts.md",
+      "heading": "Попутная схема",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "applicability_condition"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g02.rays",
+      "file": "docs/knowledge/installation-guide/02-system-layouts.md",
+      "heading": "Лучевая схема",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "applicability_condition"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g02.one",
+      "file": "docs/knowledge/installation-guide/02-system-layouts.md",
+      "heading": "Однотрубная схема",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "calculation_relationship",
+        "passport_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g02.zones",
+      "file": "docs/knowledge/installation-guide/02-system-layouts.md",
+      "heading": "Этажи и разные температурные контуры",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "applicability_condition"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g03.intro",
+      "file": "docs/knowledge/installation-guide/03-radiator-selection.md",
+      "heading": "3. Подбор и размещение радиаторов",
+      "kind": "chapter_intro",
+      "number_statuses": [
+        "context_not_numeric_requirement"
+      ],
+      "note": "Введение и границы главы сохраняются перед разделами; номер главы не является техническим значением."
+    },
+    {
+      "id": "g03.types",
+      "file": "docs/knowledge/installation-guide/03-radiator-selection.md",
+      "heading": "Какие приборы рассматривать",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "designation_not_limit",
+        "passport_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g03.power",
+      "file": "docs/knowledge/installation-guide/03-radiator-selection.md",
+      "heading": "Мощность при реальных температурах",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "calculation_relationship",
+        "educational_example",
+        "passport_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g03.select",
+      "file": "docs/knowledge/installation-guide/03-radiator-selection.md",
+      "heading": "Сколько приборов и какого размера",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "calculation_relationship",
+        "passport_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g03.place",
+      "file": "docs/knowledge/installation-guide/03-radiator-selection.md",
+      "heading": "Где устанавливать",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "project_guideline",
+        "passport_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g04.intro",
+      "file": "docs/knowledge/installation-guide/04-radiator-connections.md",
+      "heading": "4. Подключения и обвязка радиатора",
+      "kind": "chapter_intro",
+      "number_statuses": [
+        "context_not_numeric_requirement"
+      ],
+      "note": "Введение и границы главы сохраняются перед разделами; номер главы не является техническим значением."
+    },
+    {
+      "id": "g04.two",
+      "file": "docs/knowledge/installation-guide/04-radiator-connections.md",
+      "heading": "Двухтрубная система",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "passport_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g04.hblock",
+      "file": "docs/knowledge/installation-guide/04-radiator-connections.md",
+      "heading": "Заводское нижнее подключение и H-блок",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "designation_not_limit",
+        "passport_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g04.one",
+      "file": "docs/knowledge/installation-guide/04-radiator-connections.md",
+      "heading": "Однотрубная обвязка",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "passport_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g04.joints",
+      "file": "docs/knowledge/installation-guide/04-radiator-connections.md",
+      "heading": "Стыки и комплектация",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "passport_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g05.intro",
+      "file": "docs/knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md",
+      "heading": "5. Диаметры труб, гидравлика и балансировка",
+      "kind": "chapter_intro",
+      "number_statuses": [
+        "context_not_numeric_requirement"
+      ],
+      "note": "Введение и границы главы сохраняются перед разделами; номер главы не является техническим значением."
+    },
+    {
+      "id": "g05.flow",
+      "file": "docs/knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md",
+      "heading": "Нагрузка и расход",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "calculation_relationship",
+        "rounded_water_approximation",
+        "educational_example"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g05.size",
+      "file": "docs/knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md",
+      "heading": "Наружный размер и проходное сечение",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "calculation_relationship",
+        "educational_example_for_specified_wall"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g05.speed",
+      "file": "docs/knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md",
+      "heading": "Предварительный подбор по скорости",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "calculation_relationship",
+        "project_guideline",
+        "educational_example_under_stated_conditions"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g05.loss",
+      "file": "docs/knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md",
+      "heading": "Сопротивление пути",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "calculation_relationship",
+        "exact_unit_conversion"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g05.pump",
+      "file": "docs/knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md",
+      "heading": "Насос",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "calculation_relationship",
+        "approximate_gravity"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g05.balance",
+      "file": "docs/knowledge/installation-guide/05-pipe-sizing-and-hydraulics.md",
+      "heading": "Балансировка и повторная проверка",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "calculation_relationship",
+        "educational_example"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g06.intro",
+      "file": "docs/knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "6. Монтаж, испытания и запуск",
+      "kind": "chapter_intro",
+      "number_statuses": [
+        "context_not_numeric_requirement"
+      ],
+      "note": "Введение и границы главы сохраняются перед разделами; номер главы не является техническим значением."
+    },
+    {
+      "id": "g06.material",
+      "file": "docs/knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "Материал труб",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "passport_requirement",
+        "example_not_universal_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g06.prepare",
+      "file": "docs/knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "Подготовка и размещение",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "applicability_condition"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g06.route",
+      "file": "docs/knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "Как прокладывать трубы",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "applicability_condition"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g06.expand",
+      "file": "docs/knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "Изгибы, соединения и удлинение",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "calculation_relationship",
+        "passport_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g06.source",
+      "file": "docs/knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "Что предусмотреть у источника",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "passport_requirement",
+        "example_not_universal_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g06.test",
+      "file": "docs/knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "Испытания до закрытия конструкций",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "procedure_requirement",
+        "example_not_universal_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g06.start",
+      "file": "docs/knowledge/installation-guide/06-installation-and-commissioning.md",
+      "heading": "Первый запуск и наладка",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "procedure_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g07.intro",
+      "file": "docs/knowledge/installation-guide/07-worked-example.md",
+      "heading": "7. Сквозной учебный пример",
+      "kind": "chapter_intro",
+      "number_statuses": [
+        "educational_example"
+      ],
+      "note": "Введение и границы главы сохраняются перед разделами; номер главы не является техническим значением."
+    },
+    {
+      "id": "g07.section-01",
+      "file": "docs/knowledge/installation-guide/07-worked-example.md",
+      "heading": "Комната: расчёт нагрузки",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "educational_example",
+        "calculation_relationship"
+      ],
+      "note": "Все данные главы условные и не являются паспортными характеристиками."
+    },
+    {
+      "id": "g07.section-02",
+      "file": "docs/knowledge/installation-guide/07-worked-example.md",
+      "heading": "Радиатор при 55/45/20",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "educational_example",
+        "calculation_relationship"
+      ],
+      "note": "Все данные главы условные и не являются паспортными характеристиками."
+    },
+    {
+      "id": "g07.section-03",
+      "file": "docs/knowledge/installation-guide/07-worked-example.md",
+      "heading": "Расход и диаметр луча",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "educational_example",
+        "calculation_relationship"
+      ],
+      "note": "Все данные главы условные и не являются паспортными характеристиками."
+    },
+    {
+      "id": "g07.section-04",
+      "file": "docs/knowledge/installation-guide/07-worked-example.md",
+      "heading": "Сопротивление и преднастройка",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "educational_example",
+        "calculation_relationship"
+      ],
+      "note": "Все данные главы условные и не являются паспортными характеристиками."
+    },
+    {
+      "id": "g07.section-05",
+      "file": "docs/knowledge/installation-guide/07-worked-example.md",
+      "heading": "Общая магистраль и насос дома",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "educational_example",
+        "calculation_relationship"
+      ],
+      "note": "Все данные главы условные и не являются паспортными характеристиками."
+    },
+    {
+      "id": "g07.section-06",
+      "file": "docs/knowledge/installation-guide/07-worked-example.md",
+      "heading": "Что остаётся до монтажного решения",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "educational_example",
+        "calculation_relationship"
+      ],
+      "note": "Все данные главы условные и не являются паспортными характеристиками."
+    },
+    {
+      "id": "g08.intro",
+      "file": "docs/knowledge/installation-guide/08-rules-for-automatic-design.md",
+      "heading": "8. Инженерные правила для будущего автоматического построения",
+      "kind": "chapter_intro",
+      "number_statuses": [
+        "context_not_numeric_requirement"
+      ],
+      "note": "Введение и границы главы сохраняются перед разделами; номер главы не является техническим значением."
+    },
+    {
+      "id": "g08.readiness",
+      "file": "docs/knowledge/installation-guide/08-rules-for-automatic-design.md",
+      "heading": "Степень готовности результата",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "readiness_condition"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g08.sequence",
+      "file": "docs/knowledge/installation-guide/08-rules-for-automatic-design.md",
+      "heading": "Последовательность зависимых решений",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "decision_sequence"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g08.rules",
+      "file": "docs/knowledge/installation-guide/08-rules-for-automatic-design.md",
+      "heading": "Проверяемые правила",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "engineering_rule"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g08.catalog",
+      "file": "docs/knowledge/installation-guide/08-rules-for-automatic-design.md",
+      "heading": "Какие характеристики понадобятся от реального каталога",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "passport_requirement"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g08.section-05",
+      "file": "docs/knowledge/installation-guide/08-rules-for-automatic-design.md",
+      "heading": "Отличия от текущих планов редактора",
+      "kind": "historical_context",
+      "number_statuses": [
+        "applicability_condition"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    },
+    {
+      "id": "g08.section-06",
+      "file": "docs/knowledge/installation-guide/08-rules-for-automatic-design.md",
+      "heading": "Что должно быть в итоговом отчёте",
+      "kind": "engineering_section",
+      "number_statuses": [
+        "applicability_condition"
+      ],
+      "note": "Статусы относятся к целому разделу вместе с таблицами и оговорками; общие требования к паспорту не являются подтверждёнными значениями изделия."
+    }
+  ]
+}
