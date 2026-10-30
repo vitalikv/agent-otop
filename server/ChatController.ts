@@ -3,6 +3,7 @@ import { isDialogState, isRecord } from '../shared/validation.js';
 import type { ChatRequest } from '../shared/chat.js';
 import { AssistantService } from './AssistantService.js';
 import { KnowledgeBase } from './KnowledgeBase.js';
+import type { IntentPredictor } from './IntentClassifier.js';
 
 class HttpError extends Error { constructor(readonly status: number, message: string) { super(message); } }
 const maxBodyBytes = 64 * 1024;
@@ -21,7 +22,7 @@ export function validateRequest(value: unknown): ChatRequest {
 
 export class ChatController {
   private readonly assistant: AssistantService;
-  constructor(private readonly knowledge: KnowledgeBase) { this.assistant = new AssistantService(knowledge); }
+  constructor(private readonly knowledge: KnowledgeBase, private readonly classifier?: IntentPredictor) { this.assistant = new AssistantService(knowledge, classifier); }
   createServer() {
     const server = createServer((request, response) => { void this.handle(request, response); });
     server.requestTimeout = 15000;
@@ -38,7 +39,7 @@ export class ChatController {
       if (!/^(?:127\.0\.0\.1|localhost)(?::\d+)?$/.test(host)) throw new HttpError(403, 'Разрешены только локальные запросы.');
       if (request.headers.origin && !/^http:\/\/(?:127\.0\.0\.1|localhost)(?::\d+)?$/.test(request.headers.origin)) throw new HttpError(403, 'Недопустимый источник запроса.');
       const path = new URL(request.url ?? '/', 'http://127.0.0.1').pathname;
-      if (path === '/api/health' && request.method === 'GET') { json(200, { status: 'ok', data: 'loaded', scenario: 'hydraulics.flow', engine: 'rules', stateful: false }); return; }
+      if (path === '/api/health' && request.method === 'GET') { json(200, { status: 'ok', data: 'loaded', scenario: 'hydraulics.flow', engine: this.classifier ? 'rules+network' : 'rules', stateful: false }); return; }
       if (path.startsWith('/api/sources/') && request.method === 'GET') {
         const text = this.knowledge.sourceText(decodeURIComponent(path.slice('/api/sources/'.length)));
         if (!text) throw new HttpError(404, 'Источник не найден.');

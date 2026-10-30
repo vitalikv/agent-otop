@@ -1,5 +1,9 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import { test } from 'node:test';
+import { AppConfig } from '../server/AppConfig.js';
 import { IntentFeaturizer, type FeaturizerConfig } from '../server/IntentFeaturizer.js';
 import { IntentClassifier, type IntentModelFile } from '../server/IntentClassifier.js';
 
@@ -51,6 +55,16 @@ test('classifier forward pass matches the hand-computed network', () => {
   assert.equal(prediction.accepted, true);
   assert.ok(Math.abs(prediction.ranking.reduce((sum, item) => sum + item.probability, 0) - 1) < 1e-12);
   assert.equal(new IntentClassifier(model({ threshold: 0.7 })).classify('').accepted, false);
+});
+
+test('the service refuses weights trained with different text processing', async () => {
+  const root = new AppConfig().root;
+  const hash = async (file: string) => createHash('sha256').update((await readFile(join(root, file), 'utf8')).replace(/\r\n/g, '\n')).digest('hex');
+  const inputs = await Promise.all(['server/TextNormalizer.ts', 'server/IntentFeaturizer.ts'].map(async file => ({ file, sha256_lf: await hash(file) })));
+  await new IntentClassifier(model({ training: { inputs } })).verifyFeaturization(root);
+  await assert.rejects(new IntentClassifier(model({ training: { inputs: [inputs[0]] } })).verifyFeaturization(root), /IntentFeaturizer/);
+  await assert.rejects(new IntentClassifier(model({ training: { inputs: [{ ...inputs[0], sha256_lf: '0'.repeat(64) }, inputs[1]] } })).verifyFeaturization(root), /TextNormalizer/);
+  await assert.rejects(new IntentClassifier(model()).verifyFeaturization(root), /другой обработкой/);
 });
 
 test('classifier rejects malformed models', () => {

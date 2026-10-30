@@ -1,4 +1,6 @@
 import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { join } from 'node:path';
 import { IntentFeaturizer, type FeaturizerConfig } from './IntentFeaturizer.js';
 
 interface Tensor { shape: number[]; data: string; }
@@ -17,6 +19,15 @@ export interface IntentPrediction {
   accepted: boolean;
   ranking: { intent: string; probability: number }[];
 }
+export interface IntentPredictor {
+  readonly classes: string[];
+  classify(text: string): IntentPrediction;
+}
+
+export const MODEL_PATH = 'data/generated/intent-model.json';
+// Changing these files changes the features, so weights trained before the change are invalid.
+const FEATURIZATION_FILES = ['server/TextNormalizer.ts', 'server/IntentFeaturizer.ts'];
+const retrain = 'Выполните npm run train:data и npm run train:model или запустите сервис с BOT_INTENT_NETWORK=off.';
 
 function decode(tensor: Tensor, shape: number[]): Float32Array {
   if (!Array.isArray(tensor?.shape) || tensor.shape.length !== shape.length || tensor.shape.some((size, i) => size !== shape[i])) {
@@ -32,7 +43,7 @@ function decode(tensor: Tensor, shape: number[]): Float32Array {
 }
 
 /** Character n-gram bag → mean embedding → ReLU → linear layer → softmax; mirrors training/train.py. */
-export class IntentClassifier {
+export class IntentClassifier implements IntentPredictor {
   readonly featurizer: IntentFeaturizer;
   readonly classes: string[];
   readonly threshold: number;
@@ -59,6 +70,28 @@ export class IntentClassifier {
 
   static async load(path: string): Promise<IntentClassifier> {
     return new IntentClassifier(JSON.parse(await readFile(path, 'utf8')));
+  }
+
+  static async loadForService(root: string): Promise<IntentClassifier> {
+    let classifier: IntentClassifier;
+    try {
+      classifier = await IntentClassifier.load(join(root, MODEL_PATH));
+    } catch (error) {
+      const reason = (error as NodeJS.ErrnoException)?.code === 'ENOENT' ? 'файл весов отсутствует' : error instanceof Error ? error.message : String(error);
+      throw new Error(`Не удалось загрузить сеть определения намерения (${MODEL_PATH}): ${reason}. ${retrain}`);
+    }
+    await classifier.verifyFeaturization(root);
+    return classifier;
+  }
+
+  async verifyFeaturization(root: string): Promise<void> {
+    const inputs = Array.isArray(this.model.training.inputs) ? this.model.training.inputs as { file: string; sha256_lf: string }[] : [];
+    for (const file of FEATURIZATION_FILES) {
+      const content = (await readFile(join(root, file), 'utf8')).replace(/\r\n/g, '\n');
+      if (inputs.find(input => input.file === file)?.sha256_lf !== createHash('sha256').update(content).digest('hex')) {
+        throw new Error(`Сеть обучена с другой обработкой текста (${file}). ${retrain}`);
+      }
+    }
   }
 
   logits(features: readonly number[]): Float64Array {

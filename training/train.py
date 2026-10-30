@@ -266,6 +266,7 @@ def main():
         },
         'training': {
             'dataset_sha256': hashlib.sha256(raw).hexdigest(),
+            'inputs': dataset['inputs'],
             'seed': settings['seed'],
             'params': best['params'],
             'parameters': parameters,

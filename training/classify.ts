@@ -1,11 +1,11 @@
 import { createInterface } from 'node:readline';
 import { join } from 'node:path';
 import { AppConfig } from '../server/AppConfig.js';
-import { IntentClassifier } from '../server/IntentClassifier.js';
+import { IntentClassifier, MODEL_PATH } from '../server/IntentClassifier.js';
 
 // npm run intent — questions are typed line by line (npm on Windows mangles arguments with spaces);
 // node .training-build/training/classify.js "вопрос" … classifies arguments directly.
-const classifier = await IntentClassifier.load(join(new AppConfig().root, 'data/generated/intent-model.json'));
+const classifier = await IntentClassifier.load(join(new AppConfig().root, MODEL_PATH));
 const show = (question: string) => {
   const prediction = classifier.classify(question);
   const top = prediction.ranking.slice(0, 3).map(item => `${item.intent} ${(item.probability * 100).toFixed(1)}%`).join(', ');

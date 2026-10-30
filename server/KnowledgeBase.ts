@@ -27,17 +27,26 @@ export interface FlowDefinition {
 }
 interface SourceRecord { file: string; heading: string; text: string; }
 interface Reference { id: string; answer: string; source_ids: string[]; }
+export interface IntentExplanation {
+  id: string;
+  title: string;
+  explanation: string;
+  required_data_for_concrete_decision: string;
+  boundary: string;
+  source_ids: string[];
+}
 interface Bundle {
   schema_version: number;
   provenance: { inputs: { file: string; sha256_lf: string }[] };
   chunks: (SourceRecord & { id: string; sha256_lf: string })[];
   supporting_sources: Record<string, SourceRecord>;
+  intent_explanations: { records: IntentExplanation[] };
   calculators: FlowDefinition[];
   reference_answers: Reference[];
 }
 
 export class KnowledgeBase {
-  private constructor(readonly flow: FlowDefinition, private readonly sources: Map<string, SourceRecord>, private readonly references: Reference[]) {}
+  private constructor(readonly flow: FlowDefinition, private readonly sources: Map<string, SourceRecord>, private readonly references: Reference[], private readonly intents: Map<string, IntentExplanation>) {}
 
   static async load(root: string): Promise<KnowledgeBase> {
     try {
@@ -69,7 +78,15 @@ export class KnowledgeBase {
       for (const id of ['g05.flow', 'safety.gas', 'safety.co', 'safety.electric', 'safety.hot', 'safety.protection']) {
         if (!sources.has(id)) throw new Error(`Нет источника: ${id}`);
       }
-      return new KnowledgeBase(flow, sources, references);
+      const intents = new Map<string, IntentExplanation>();
+      for (const record of bundle.intent_explanations?.records ?? []) {
+        const fields = [record.id, record.title, record.explanation, record.required_data_for_concrete_decision, record.boundary];
+        if (!fields.every(field => typeof field === 'string' && field.trim()) || intents.has(record.id) || [...intents.values()].some(item => item.title === record.title)) throw new Error(`Неверное объяснение намерения: ${record.id}`);
+        if (!Array.isArray(record.source_ids) || !record.source_ids.length || record.source_ids.some(id => !sources.has(id))) throw new Error(`Нет источника объяснения: ${record.id}`);
+        intents.set(record.id, record);
+      }
+      if (!intents.has('hydraulics.flow')) throw new Error('Нет объяснений намерений.');
+      return new KnowledgeBase(flow, sources, references, intents);
     } catch (error) {
       throw new Error(`Не удалось загрузить базу. Выполните npm run data:prepare и npm run data:check-generated. ${error instanceof Error ? error.message : String(error)}`);
     }
@@ -84,6 +101,15 @@ export class KnowledgeBase {
   sourceText(id: string): string | undefined {
     const source = this.sources.get(id);
     return source ? `${source.file}\n\n${source.text}` : undefined;
+  }
+
+  intent(id: string): IntentExplanation | undefined {
+    return this.intents.get(id);
+  }
+
+  // Clarification buttons send the intent title back as the user's message.
+  intentByTitle(title: string): IntentExplanation | undefined {
+    return [...this.intents.values()].find(item => item.title === title);
   }
 
   reference(id: string): Reference {
